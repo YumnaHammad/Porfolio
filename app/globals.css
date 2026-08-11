@@ -1,26 +1,230 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ------------------------------------------------------------------
+   Design tokens
+   A single accent, a near-black ground, and a three-step text scale.
+------------------------------------------------------------------ */
+@theme {
+  --color-ink: #08080a;
+  --color-ink-2: #0c0c10;
+  --color-surface: #101015;
+  --color-surface-2: #16161d;
+  --color-line: #22222c;
+  --color-line-soft: #191921;
+
+  --color-bone: #ececed;
+  --color-mute: #8b8b96;
+  /* Meets 4.5:1 against --color-ink — the mono metadata is small, so it can't
+     go quieter than this without failing contrast. */
+  --color-faint: #7a7a86;
+
+  --color-accent: #7c5cff;
+  --color-accent-bright: #9b83ff;
+  --color-accent-deep: #4a2fd6;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-jb), ui-monospace, "SFMono-Regular", monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ------------------------------------------------------------------
+   Base
+------------------------------------------------------------------ */
+html {
+  scroll-behavior: smooth;
+  /* Sticky nav clearance for in-page anchors */
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  /* Nothing in the composition is allowed to push the page sideways */
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-bright);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Scrollbar — quiet, matches the ground */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border-radius: 99px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #33333f;
+}
+
+/* ------------------------------------------------------------------
+   Type utilities
+------------------------------------------------------------------ */
+@utility display {
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-faint);
+}
+
+/* Section rhythm, recomposed rather than merely scaled on small screens */
+@utility section-pad {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  @media (width >= 768px) {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+  }
+  @media (width >= 1280px) {
+    padding-top: 9.5rem;
+    padding-bottom: 9.5rem;
+  }
+}
+
+@utility shell {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 90rem;
+  padding-inline: 1.25rem;
+  @media (width >= 768px) {
+    padding-inline: 2.5rem;
+  }
+  @media (width >= 1280px) {
+    padding-inline: 4rem;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Atmosphere
+------------------------------------------------------------------ */
+
+/* Fine grain — kills banding in the large dark gradients */
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@utility grid-field {
+  background-image: linear-gradient(
+      to right,
+      var(--color-line-soft) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, var(--color-line-soft) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+@utility hairline {
+  border-top: 1px solid var(--color-line-soft);
+}
+
+/* ------------------------------------------------------------------
+   Animation primitives
+------------------------------------------------------------------ */
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+@keyframes sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee 42s linear infinite;
+}
+@utility animate-pulse-dot {
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+@utility animate-drift {
+  animation: drift 7s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------
+   Reduced motion — simplify, never break.
+   Content stays visible; only the movement is removed.
+------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* The custom cursor only exists for precise pointers */
+@media (hover: none), (pointer: coarse) {
+  .cursor-host {
+    display: none !important;
+  }
 }
