@@ -30,7 +30,7 @@ const icons: Record<string, LucideIcon> = {
 
 export function Services() {
   return (
-    <section id="services" className="section-pad relative border-t border-line-soft">
+    <section id="services" className="section-alt section-pad relative">
       <div className="shell">
         <SectionHeading
           index="07"
@@ -90,7 +90,7 @@ export function Services() {
 
 export function WhyMe() {
   return (
-    <section className="section-pad relative">
+    <section className="section-edge section-pad relative">
       <div className="shell">
         <SectionHeading
           index="08"

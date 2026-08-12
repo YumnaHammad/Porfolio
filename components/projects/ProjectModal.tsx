@@ -185,6 +185,12 @@ export function ProjectModal({
                 </span>
               </div>
 
+              {project.demoNote && (
+                <p className="mt-3 font-mono text-[11px] text-faint">
+                  {project.demoNote}
+                </p>
+              )}
+
               {/* Cover */}
               <div className="group relative mt-12 aspect-16/10 overflow-hidden rounded-2xl border border-line md:aspect-21/9">
                 <ProjectPlate project={project} sizes="(max-width: 1280px) 100vw, 64rem" />

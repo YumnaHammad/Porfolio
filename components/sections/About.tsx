@@ -10,37 +10,29 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 const blocks = [
   {
     label: "Who I am",
-    body: "A frontend-focused developer in Islamabad, working on-site at Funsol Technologies and taking freelance product work alongside it. Four years in, most of it spent shipping interfaces other people depend on.",
+    body: "Frontend developer in Islamabad. On-site at Funsol Technologies, freelancing since 2022.",
   },
   {
     label: "What I build",
-    body: "SaaS applications, dashboards and admin systems, eCommerce experiences, business websites, interactive tools and API-driven applications — plus the occasional thing that doesn't fit a category, like a programmatic video platform.",
+    body: "SaaS products, dashboards, eCommerce, interactive tools and API-driven applications.",
   },
   {
     label: "How I work",
-    body: "I start from whatever exists: a Figma file, a screenshot, a written spec, a live site, or a rough idea. Then interface implementation, API integration, state management, optimisation, deployment and the refinement that only shows up once it's live.",
-  },
-  {
-    label: "What I'm learning",
-    body: "Where AI genuinely belongs in a development workflow — prompt engineering, AI-assisted implementation, and generative video and voice pipelines — separated from where it's just noise.",
+    body: "Figma, screenshot or rough idea in — production interface, integrated and deployed, out.",
   },
   {
     label: "Where I add value",
-    body: "Between design and engineering. I read a design the way it was intended and build it so it survives real data, real devices and the next developer who opens the file.",
+    body: "Between design and engineering: builds that survive real data, real devices and the next developer.",
   },
 ];
 
 export function About() {
   return (
-    <section id="about" className="section-pad relative">
+    <section id="about" className="section-alt section-pad relative">
       {/* Quiet ambient wash — keeps the long-form section from going flat */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[38rem]"
-        style={{
-          background:
-            "radial-gradient(60% 45% at 15% 10%, rgba(124,92,255,0.09), transparent 70%)",
-        }}
+        className="wash-top pointer-events-none absolute inset-x-0 top-0 -z-10 h-[38rem]"
       />
 
       <div className="shell">
@@ -102,8 +94,7 @@ export function About() {
                   <div className="mt-8 border-t border-line-soft pt-7">
                     <p className="eyebrow">Languages</p>
                     <p className="mt-2 text-sm text-mute">
-                      English — professional working proficiency. Comfortable
-                      leading client and stakeholder conversations directly.
+                      English — professional working proficiency.
                     </p>
                   </div>
 

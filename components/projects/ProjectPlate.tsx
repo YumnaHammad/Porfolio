@@ -15,12 +15,53 @@ import { cn } from "@/lib/utils";
  * pretends to be a screenshot) and keeps the showcase composed.
  */
 
-const stroke = "rgba(155,131,255,0.55)";
-const faint = "rgba(236,236,237,0.14)";
-const solid = "rgba(124,92,255,0.22)";
+/* Theme-aware: these resolve to CSS variables defined per theme in
+   globals.css, so the generated covers re-grade in light mode along with
+   everything else. */
+const stroke = "var(--plate-stroke)";
+const faint = "var(--plate-faint)";
+const solid = "var(--plate-solid)";
 
 function Motif({ motif }: { motif: ProjectMotif }) {
   switch (motif) {
+    case "editor":
+      return (
+        <g>
+          {/* tool rail */}
+          <rect x="24" y="24" width="52" height="200" rx="6" stroke={faint} fill="none" />
+          {[38, 66, 94, 122].map((y, i) => (
+            <rect
+              key={y}
+              x="36"
+              y={y}
+              width="28"
+              height="18"
+              rx="4"
+              fill={i === 0 ? solid : "none"}
+              stroke={i === 0 ? stroke : faint}
+            />
+          ))}
+          {/* canvas */}
+          <rect x="90" y="24" width="196" height="150" rx="6" stroke={faint} fill="none" />
+          <rect x="106" y="42" width="120" height="9" rx="4.5" fill={faint} />
+          <rect x="106" y="60" width="164" height="7" rx="3.5" fill={faint} />
+          <rect x="106" y="76" width="150" height="7" rx="3.5" fill={faint} />
+          <rect x="106" y="98" width="164" height="42" rx="5" fill={solid} stroke={stroke} />
+          <rect x="118" y="112" width="96" height="7" rx="3.5" fill={stroke} />
+          <rect x="118" y="124" width="130" height="6" rx="3" fill={faint} />
+          {/* AI prompt bar */}
+          <rect x="90" y="190" width="196" height="34" rx="17" fill={solid} stroke={stroke} />
+          <circle cx="112" cy="207" r="7" fill={stroke} />
+          <rect x="128" y="203" width="104" height="8" rx="4" fill={faint} />
+          <rect x="246" y="198" width="28" height="18" rx="9" fill={stroke} />
+          {/* inspector */}
+          <rect x="300" y="24" width="76" height="200" rx="6" stroke={faint} fill="none" />
+          {[40, 70, 100, 130, 160, 190].map((y) => (
+            <rect key={y} x="312" y={y} width={y % 60 ? 52 : 40} height="6" rx="3" fill={faint} />
+          ))}
+        </g>
+      );
+
     case "video":
       return (
         <g>
@@ -48,8 +89,8 @@ function Motif({ motif }: { motif: ProjectMotif }) {
           {[32, 96, 160, 224, 288].map((x) => (
             <rect key={x} x={x} y="202" width="48" height="10" rx="2" fill={faint} />
           ))}
-          <line x1="168" y1="160" x2="168" y2="228" stroke="#9b83ff" strokeWidth="1.5" />
-          <circle cx="168" cy="160" r="3.5" fill="#9b83ff" />
+          <line x1="168" y1="160" x2="168" y2="228" stroke="var(--color-accent-bright)" strokeWidth="1.5" />
+          <circle cx="168" cy="160" r="3.5" fill="var(--color-accent-bright)" />
         </g>
       );
 
@@ -64,7 +105,7 @@ function Motif({ motif }: { motif: ProjectMotif }) {
               width="132"
               height="172"
               rx="6"
-              fill={i === 2 ? solid : "rgba(16,16,21,0.9)"}
+              fill={i === 2 ? solid : "var(--color-surface)"}
               stroke={i === 2 ? stroke : faint}
             />
           ))}
@@ -184,7 +225,7 @@ function Motif({ motif }: { motif: ProjectMotif }) {
             cx="80"
             cy="112"
             r="52"
-            stroke="#9b83ff"
+            stroke="var(--color-accent-bright)"
             fill="none"
             strokeWidth="8"
             strokeLinecap="round"
@@ -272,8 +313,8 @@ function Motif({ motif }: { motif: ProjectMotif }) {
           <circle cx="200" cy="99" r="30" stroke={stroke} fill="none" />
           <path d="M192 86l22 13-22 13z" fill={stroke} />
           <rect x="24" y="190" width="352" height="4" rx="2" fill={faint} />
-          <rect x="24" y="190" width="196" height="4" rx="2" fill="#9b83ff" />
-          <circle cx="220" cy="192" r="6" fill="#9b83ff" />
+          <rect x="24" y="190" width="196" height="4" rx="2" fill="var(--color-accent-bright)" />
+          <circle cx="220" cy="192" r="6" fill="var(--color-accent-bright)" />
           {[40, 66, 92].map((x) => (
             <circle key={x} cx={x} cy="214" r="7" stroke={faint} fill="none" />
           ))}
@@ -350,14 +391,7 @@ export function ProjectPlate({
       aria-label={`${project.title} — ${project.type} interface diagram`}
     >
       <div aria-hidden className="grid-field absolute inset-0 opacity-40" />
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(70% 60% at 50% 0%, rgba(124,92,255,0.16), transparent 70%)",
-        }}
-      />
+      <div aria-hidden className="wash-top absolute inset-0" />
       <svg
         viewBox="0 0 400 248"
         className="relative w-[78%] max-w-[42rem]"

@@ -66,11 +66,21 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#08080a",
-  colorScheme: "dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#08080a" },
+    { media: "(prefers-color-scheme: light)", color: "#f7f7f8" },
+  ],
+  colorScheme: "dark light",
   width: "device-width",
   initialScale: 1,
 };
+
+/**
+ * Runs before first paint: applies the saved choice, falling back to the
+ * system preference, so the correct theme is painted immediately rather than
+ * flashing dark-then-light. Without JS the CSS defaults to dark.
+ */
+const themeScript = `(function(){try{var s=localStorage.getItem('theme');var d=s||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',d);}catch(e){}})();`;
 
 /** Structured data — only facts stated on the page itself. */
 const personSchema = {
@@ -79,6 +89,7 @@ const personSchema = {
   name: site.name,
   jobTitle: "Frontend Developer & Full-Stack Developer",
   email: `mailto:${site.email}`,
+  telephone: site.phoneIntl,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Islamabad",
@@ -103,8 +114,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      // The theme script stamps data-theme before paint; that divergence from
+      // the server HTML is intentional, not a bug to warn about.
+      suppressHydrationWarning
       className={`${inter.variable} ${jetbrains.variable} h-full antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="bg-ink text-bone min-h-full">
         <script
           type="application/ld+json"

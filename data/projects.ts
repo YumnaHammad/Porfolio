@@ -20,6 +20,7 @@ export type ProjectLayout =
   | "rail"; // sits in the horizontal scrolling rail
 
 export type ProjectMotif =
+  | "editor"
   | "video"
   | "document"
   | "dashboard"
@@ -56,10 +57,46 @@ export interface Project {
   image?: string;
   liveUrl?: string;
   githubUrl?: string;
+  /**
+   * Shown next to the live link when the demo isn't openly browsable.
+   * Never put credentials here — this file ships to the browser.
+   */
+  demoNote?: string;
   caseStudy?: CaseStudy;
 }
 
 export const projects: Project[] = [
+  {
+    slug: "ai-editor",
+    title: "AI Editor",
+    category: "AI Product · Vue.js",
+    type: "AI-powered editor",
+    year: "2026",
+    description:
+      "A large AI-powered editor built in Vue.js — my main product work at Funsol Technologies.",
+    technologies: ["Vue.js", "JavaScript", "REST APIs", "Component architecture"],
+    capabilities: [
+      "AI-assisted editing interface",
+      "Large-scale component architecture",
+      "Reusable UI systems",
+      "API-driven application state",
+      "Responsive product interface",
+    ],
+    motif: "editor",
+    layout: "feature",
+    featured: true,
+    caseStudy: {
+      overview:
+        "An AI-powered editor developed in Vue.js at Funsol Technologies, where I work as a frontend developer on the product.",
+      approach:
+        "A long-running product rather than a one-off build: the interface is composed from a reusable component system so features can be added without the editor drifting apart.",
+      architecture: [
+        "Vue.js component architecture across a large editor surface",
+        "Shared UI system for consistent editor controls",
+        "REST API integration driving application state",
+      ],
+    },
+  },
   {
     slug: "framekit-remotion",
     title: "Framekit",
@@ -67,7 +104,7 @@ export const projects: Project[] = [
     type: "Programmatic video platform",
     year: "2026",
     description:
-      "A template-driven platform that turns structured data and scripts into rendered video — timeline editing, live preview and export, built on Remotion.",
+      "Turns spreadsheets, scripts and URLs into rendered video. Built on Remotion.",
     technologies: [
       "Next.js",
       "TypeScript",
@@ -85,8 +122,9 @@ export const projects: Project[] = [
       "Video export & rendering pipeline",
     ],
     motif: "video",
-    layout: "feature",
+    layout: "visual",
     featured: true,
+    liveUrl: "https://remotion-green.vercel.app/",
     caseStudy: {
       overview:
         "Framekit treats video as a render target for React. Instead of editing clips by hand, a user picks a template, feeds it structured input — a spreadsheet, a JSON payload, a script, or a URL — and the platform composes a multi-scene video from it.",
@@ -119,7 +157,7 @@ export const projects: Project[] = [
     type: "PDF tools platform",
     year: "2026",
     description:
-      "A modern SaaS surface for document workflows — a suite of PDF tools sharing one responsive, tool-based interface architecture.",
+      "A suite of PDF tools sharing one responsive SaaS interface.",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "REST APIs"],
     capabilities: [
       "PDF processing workflows",
@@ -131,6 +169,8 @@ export const projects: Project[] = [
     motif: "document",
     layout: "split",
     featured: true,
+    /* The www subdomain has no valid TLS cert; the apex serves HTTPS fine. */
+    liveUrl: "https://tools4pdf.com/",
     caseStudy: {
       overview:
         "A platform where every PDF operation is a self-contained tool rendered through one shared interface shell — upload, configure, process, download.",
@@ -156,7 +196,7 @@ export const projects: Project[] = [
     type: "Inventory & admin platform",
     year: "2025",
     description:
-      "A full inventory management system for The Mother Land Mart — data-driven admin interfaces backed by a MERN stack.",
+      "Inventory management and admin dashboards on the MERN stack.",
     technologies: ["React", "Node.js", "Express", "MongoDB", "REST APIs"],
     capabilities: [
       "Inventory tracking & management",
@@ -166,8 +206,10 @@ export const projects: Project[] = [
       "End-to-end API integration",
     ],
     motif: "dashboard",
-    layout: "visual",
+    layout: "stacked",
     featured: true,
+    liveUrl: "https://tml-frontend.vercel.app/",
+    demoNote: "Sign-in required — ask me for access",
     caseStudy: {
       overview:
         "Designed and built as a working operational system for a retail business — the interface people actually use to keep stock accurate, not a dashboard mockup.",
@@ -190,7 +232,7 @@ export const projects: Project[] = [
     type: "Fragrance storefront",
     year: "2025",
     description:
-      "A luxury fragrance commerce experience where product presentation and storytelling carry the same weight as the buying flow.",
+      "Luxury fragrance storefront — product storytelling meets a conversion-focused buying flow.",
     technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
     capabilities: [
       "Premium visual direction",
@@ -202,6 +244,7 @@ export const projects: Project[] = [
     motif: "commerce",
     layout: "split",
     featured: true,
+    liveUrl: "https://azwah-seven.vercel.app/",
     caseStudy: {
       overview:
         "Fragrance cannot be sampled through a screen, so the storefront sells through atmosphere — imagery, pacing and typography doing the work a tester strip would do in person.",
@@ -221,7 +264,7 @@ export const projects: Project[] = [
     type: "Assessment & scoring system",
     year: "2025",
     description:
-      "An interactive Glasgow Coma Scale assessment — structured scoring, guided workflow and a self-test mode, built as a real tool rather than a reference page.",
+      "Interactive Glasgow Coma Scale assessment with live scoring and a self-test mode.",
     technologies: ["React", "TypeScript", "Tailwind CSS"],
     capabilities: [
       "Structured assessment workflow",
@@ -233,6 +276,7 @@ export const projects: Project[] = [
     motif: "assessment",
     layout: "stacked",
     featured: true,
+    liveUrl: "https://gcs-brown.vercel.app/",
     caseStudy: {
       overview:
         "The Glasgow Coma Scale is a scored assessment across three response categories. The tool walks a user through it, computes the score from their selections, and offers a self-test mode to practise against.",
@@ -254,7 +298,7 @@ export const projects: Project[] = [
     type: "Technology company website",
     year: "2025",
     description:
-      "An enterprise technology website carrying a large service and solutions hierarchy without losing the visitor inside it.",
+      "Enterprise technology site with a deep service and industry hierarchy.",
     technologies: ["Next.js", "React", "Tailwind CSS"],
     capabilities: [
       "Enterprise information architecture",
@@ -266,6 +310,7 @@ export const projects: Project[] = [
     motif: "enterprise",
     layout: "rail",
     featured: false,
+    liveUrl: "https://webginet.vercel.app/",
     caseStudy: {
       overview:
         "A corporate site whose real difficulty is structural: many services, many industries, and every page needing to stay reachable and legible.",
@@ -280,7 +325,7 @@ export const projects: Project[] = [
     type: "Venue & booking experience",
     year: "2025",
     description:
-      "A premium sports and events venue site — immersive imagery, service presentation and a booking path that stays out of its own way.",
+      "Premium sports and events venue site with a booking flow.",
     technologies: ["Next.js", "React", "Tailwind CSS", "GSAP"],
     capabilities: [
       "Luxury visual direction",
@@ -292,6 +337,91 @@ export const projects: Project[] = [
     motif: "editorial",
     layout: "rail",
     featured: false,
+    liveUrl: "https://snookerball.vercel.app/",
+  },
+  {
+    slug: "pak-arabian",
+    title: "Pak Arabian Enterprises",
+    category: "eCommerce · Luxury Fragrance",
+    type: "Direct-to-consumer storefront",
+    year: "2025",
+    description:
+      "Artisanal perfume house storefront — a browsable fragrance library and an account-free ordering flow.",
+    technologies: ["Next.js", "React", "Tailwind CSS"],
+    capabilities: [
+      "Fragrance library with category browsing",
+      "Product detail and stock presentation",
+      "Account-free, three-step ordering flow",
+      "Brand storytelling and testimonials",
+      "Responsive commerce UI",
+    ],
+    motif: "commerce",
+    layout: "rail",
+    featured: false,
+    liveUrl: "https://pak-arabian.vercel.app/",
+    caseStudy: {
+      overview:
+        "A direct-to-consumer storefront for an artisanal perfume house, built around a browsable library of scents split by men's, women's, unisex and signature collections.",
+      approach:
+        "The buying flow is deliberately short — choose a fragrance, order without creating an account, pay on delivery — so the interface carries the brand rather than a checkout funnel.",
+    },
+  },
+  {
+    slug: "lumina",
+    title: "LUMINA",
+    category: "eCommerce · Fashion",
+    type: "Luxury apparel storefront",
+    year: "2025",
+    description:
+      "Luxury abaya and evening wear storefront, led by collection and editorial presentation.",
+    technologies: ["React", "JavaScript", "CSS"],
+    capabilities: [
+      "Featured collections and new arrivals",
+      "Editorial product presentation",
+      "Catalogue browsing",
+      "Responsive storefront layout",
+    ],
+    motif: "commerce",
+    layout: "rail",
+    featured: false,
+    liveUrl: "https://lumina-eight-khaki.vercel.app/",
+    caseStudy: {
+      overview:
+        "A storefront for luxury abayas and evening wear, structured around seasonal collections rather than a flat product grid.",
+      uiux: [
+        "Collection-first browsing over catalogue density",
+        "Editorial imagery carrying the brand positioning",
+      ],
+    },
+  },
+  {
+    slug: "surveillance-platform",
+    title: "Surveillance Solutions Platform",
+    category: "Enterprise · Security Technology",
+    type: "Product & solutions website",
+    year: "2025",
+    description:
+      "Enterprise security product site — cameras, NVR/VMS and IoT sensors organised by product line and industry.",
+    technologies: ["React", "Vite", "JavaScript", "Responsive UI"],
+    capabilities: [
+      "Product catalogue across cameras, NVR/VMS and sensors",
+      "Solutions segmented by industry",
+      "Lead-capture and online demo request flows",
+      "Deep multi-level navigation",
+      "Responsive enterprise layout",
+    ],
+    motif: "enterprise",
+    layout: "rail",
+    featured: false,
+    liveUrl: "https://frontend-zeta-ruddy-69.vercel.app/",
+    caseStudy: {
+      overview:
+        "A security technology site presenting network cameras, PTZ, NVR/VMS, LoRaWAN sensors and access control, cross-cut by industry solutions such as city surveillance and healthcare.",
+      problem:
+        "Two overlapping taxonomies — products and industries — both need to lead to the same enquiry, without the visitor having to understand the catalogue first.",
+      approach:
+        "Products and solutions are separate entry paths into one shared enquiry flow, so either mental model reaches a contact form.",
+    },
   },
   {
     slug: "video-player",
@@ -300,7 +430,7 @@ export const projects: Project[] = [
     type: "Custom player UI",
     year: "2024",
     description:
-      "A custom video interface — media controls, playback state and responsive behaviour built from the ground up rather than themed defaults.",
+      "Custom video interface — media controls and playback state built from scratch.",
     technologies: ["React", "TypeScript", "CSS"],
     capabilities: [
       "Custom media controls",
@@ -311,6 +441,7 @@ export const projects: Project[] = [
     motif: "media",
     layout: "rail",
     featured: false,
+    liveUrl: "https://video-player-xi-lyart.vercel.app/",
   },
   {
     slug: "psychologist",
@@ -319,7 +450,7 @@ export const projects: Project[] = [
     type: "Practice website",
     year: "2024",
     description:
-      "A calm, trust-led site for a private practice, where clarity and restraint are the design brief.",
+      "Calm, trust-led site for a private practice.",
     technologies: ["React", "Next.js", "Tailwind CSS"],
     capabilities: [
       "Trust-focused visual language",
@@ -328,27 +459,29 @@ export const projects: Project[] = [
       "Responsive interface",
     ],
     motif: "editorial",
-    layout: "rail",
+    layout: "stacked",
     featured: false,
+    liveUrl: "https://psychologist-ruby.vercel.app/",
   },
   {
     slug: "auth-application",
-    title: "Authentication Application",
-    category: "Application · Frontend Architecture",
-    type: "Auth & forms system",
+    title: "Nexus Dashboard",
+    category: "Application · Dashboard",
+    type: "Dashboard & auth system",
     year: "2024",
     description:
-      "An application built around authentication and form workflows — validation, protected views and the state handling underneath them.",
+      "Dashboard application — authentication, protected routing, user and content management.",
     technologies: ["React", "TypeScript", "Context API", "REST APIs"],
     capabilities: [
-      "Authentication flows",
+      "Authentication and protected routing",
+      "User and content management views",
       "Form workflows with validation",
-      "Protected routing",
-      "Frontend state architecture",
+      "Scalable dashboard architecture",
     ],
     motif: "auth",
-    layout: "rail",
+    layout: "stacked",
     featured: false,
+    liveUrl: "https://assignment-practice.vercel.app/login",
   },
 ];
 

@@ -27,7 +27,7 @@ export function Skills() {
     .filter(Boolean);
 
   return (
-    <section id="skills" className="section-pad relative border-t border-line-soft">
+    <section id="skills" className="section-alt section-pad relative">
       <div className="shell">
         <SectionHeading
           index="05"

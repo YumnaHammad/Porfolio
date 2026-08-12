@@ -71,20 +71,32 @@ export function Work() {
           {showAll && rest.length > 0 && (
             <ul className="mb-14 grid gap-4 md:grid-cols-2">
               {rest.map((project) => (
-                <li key={project.slug}>
+                <li
+                  key={project.slug}
+                  className="group flex items-center justify-between gap-4 rounded-2xl border border-line-soft bg-ink-2/50 px-6 py-5 transition-colors hover:border-accent/50"
+                >
                   <button
                     type="button"
                     onClick={() => open(project)}
-                    className="group flex w-full items-center justify-between gap-6 rounded-2xl border border-line-soft bg-ink-2/50 px-6 py-6 text-left transition-colors hover:border-accent/50"
+                    className="flex-1 text-left"
                   >
-                    <span>
-                      <span className="eyebrow">{project.category}</span>
-                      <span className="mt-2 block text-xl font-medium tracking-tight">
-                        {project.title}
-                      </span>
+                    <span className="eyebrow">{project.category}</span>
+                    <span className="mt-2 block text-xl font-medium tracking-tight">
+                      {project.title}
                     </span>
-                    <ArrowUpRight className="h-5 w-5 shrink-0 text-mute transition-all group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-accent-bright" />
                   </button>
+
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 text-xs text-mute transition-colors hover:border-accent hover:text-accent-bright"
+                    >
+                      Live
+                      <ArrowUpRight className="h-3 w-3" />
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

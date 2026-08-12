@@ -1,10 +1,16 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   Design tokens
-   A single accent, a near-black ground, and a three-step text scale.
+   Theme
+   Dark is the default identity; light is a full re-grade, not an
+   inversion. Every surface colour is a token, so components never
+   need to know which theme is active.
+
+   An inline script in app/layout.tsx stamps data-theme on <html>
+   before first paint, so there is no flash and no-JS still gets dark.
 ------------------------------------------------------------------ */
 @theme {
+  /* Dark (default) */
   --color-ink: #08080a;
   --color-ink-2: #0c0c10;
   --color-surface: #101015;
@@ -26,6 +32,53 @@
   --font-mono: var(--font-mono-jb), ui-monospace, "SFMono-Regular", monospace;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Strength of atmospheric washes — dialled back in light mode */
+  --glow: 0.1;
+  --glow-strong: 0.16;
+  --grain-opacity: 0.035;
+
+  /* Alternating section ground — a visible step, not a guess */
+  --section-alt-bg: #0e0e13;
+
+  /* Generated project-cover palette (components/projects/ProjectPlate.tsx) */
+  --plate-stroke: rgb(155 131 255 / 0.55);
+  --plate-faint: rgb(236 236 237 / 0.14);
+  --plate-solid: rgb(124 92 255 / 0.22);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --color-ink: #f7f7f8;
+  --color-ink-2: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-2: #f0f0f2;
+  --color-line: #dcdce2;
+  --color-line-soft: #e8e8ec;
+
+  --color-bone: #131316;
+  --color-mute: #55555f;
+  /* 4.5:1 against the light ground */
+  --color-faint: #67676f;
+
+  --color-accent: #6544e8;
+  --color-accent-bright: #5433d8;
+  --color-accent-deep: #4526bd;
+
+  --glow: 0.07;
+  --glow-strong: 0.1;
+  --grain-opacity: 0.02;
+
+  --section-alt-bg: #ffffff;
+
+  --plate-stroke: rgb(84 51 216 / 0.5);
+  --plate-faint: rgb(19 19 22 / 0.14);
+  --plate-solid: rgb(101 68 232 / 0.14);
 }
 
 /* ------------------------------------------------------------------
@@ -131,7 +184,7 @@ body {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.035;
+    opacity: var(--grain-opacity);
     z-index: 1;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
@@ -148,6 +201,79 @@ body {
 }
 
 @utility hairline {
+  border-top: 1px solid var(--color-line-soft);
+}
+
+/* ---- Atmosphere -------------------------------------------------
+   These live here rather than as inline styles so both themes are
+   graded in one place. Each fades toward the current page colour.
+------------------------------------------------------------------ */
+
+/** Accent bloom falling from the top of a section. */
+@utility wash-top {
+  background: radial-gradient(
+    90% 60% at 50% 0%,
+    color-mix(in srgb, var(--color-accent) calc(var(--glow) * 100%), transparent),
+    transparent 70%
+  );
+}
+
+/** Accent bloom rising from the bottom (contact). */
+@utility wash-bottom {
+  background: radial-gradient(
+    70% 50% at 50% 100%,
+    color-mix(in srgb, var(--color-accent) calc(var(--glow-strong) * 100%), transparent),
+    transparent 70%
+  );
+}
+
+/** Off-centre bloom used behind long-form sections. */
+@utility wash-corner {
+  background: radial-gradient(
+    55% 40% at 80% 15%,
+    color-mix(in srgb, var(--color-accent) calc(var(--glow) * 100%), transparent),
+    transparent 70%
+  );
+}
+
+/** Darkens (or lightens) the edges toward the page colour. */
+@utility vignette {
+  background: radial-gradient(
+    120% 120% at 50% 50%,
+    transparent 40%,
+    color-mix(in srgb, var(--color-ink) 90%, transparent) 100%
+  );
+}
+
+/** Falloff inside the portrait frame, seating the subject in the panel. */
+@utility frame-falloff {
+  background: radial-gradient(
+    75% 65% at 50% 38%,
+    transparent 35%,
+    color-mix(in srgb, var(--color-ink) 55%, transparent) 100%
+  );
+}
+
+/** Bloom behind the cut-out portrait so it doesn't float unsupported. */
+@utility subject-glow {
+  background: radial-gradient(
+    50% 45% at 50% 45%,
+    color-mix(in srgb, var(--color-accent) 22%, transparent),
+    transparent 70%
+  );
+}
+
+/* ---- Section rhythm ---------------------------------------------
+   Alternating ground + a hairline gives each section a clear edge
+   without adding any decoration.
+------------------------------------------------------------------ */
+@utility section-alt {
+  background-color: var(--section-alt-bg);
+  border-top: 1px solid var(--color-line-soft);
+  border-bottom: 1px solid var(--color-line-soft);
+}
+
+@utility section-edge {
   border-top: 1px solid var(--color-line-soft);
 }
 

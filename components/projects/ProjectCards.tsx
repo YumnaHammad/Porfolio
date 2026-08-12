@@ -335,6 +335,18 @@ export function RailCard({ project, index, onOpen }: CardProps) {
         <div className="mt-5">
           <Tech items={project.technologies} max={3} />
         </div>
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="mt-5 inline-flex items-center gap-1.5 text-sm text-mute transition-colors hover:text-accent-bright"
+          >
+            Visit live site
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
+        )}
       </div>
     </article>
   );

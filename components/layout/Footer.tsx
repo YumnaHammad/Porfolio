@@ -1,10 +1,12 @@
 "use client";
 
-import { ArrowUp, Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
+import { ArrowUp, Mail, Phone } from "lucide-react";
+import { GithubIcon, LinkedinIcon, WhatsappIcon } from "@/components/ui/BrandIcons";
 import { navItems, site } from "@/data/site";
 
 const socials = [
+  { href: site.whatsapp, label: "WhatsApp", Icon: WhatsappIcon, external: true },
+  { href: site.phoneHref, label: site.phone, Icon: Phone },
   { href: `mailto:${site.email}`, label: "Email", Icon: Mail },
   site.linkedin && {
     href: site.linkedin,
@@ -37,12 +39,20 @@ export function Footer() {
               Frontend Developer · Full-Stack Capable · AI &amp; Creative
               Development
             </p>
-            <a
-              href={`mailto:${site.email}`}
-              className="mt-5 inline-block text-sm text-mute underline-offset-4 transition-colors hover:text-accent-bright hover:underline"
-            >
-              {site.email}
-            </a>
+            <div className="mt-5 space-y-1.5">
+              <a
+                href={site.phoneHref}
+                className="block text-sm text-bone underline-offset-4 transition-colors hover:text-accent-bright hover:underline"
+              >
+                {site.phone}
+              </a>
+              <a
+                href={`mailto:${site.email}`}
+                className="block text-sm text-mute underline-offset-4 transition-colors hover:text-accent-bright hover:underline"
+              >
+                {site.email}
+              </a>
+            </div>
           </div>
 
           {/* Navigation */}

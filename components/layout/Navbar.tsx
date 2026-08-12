@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { navItems, site } from "@/data/site";
+import { ThemeToggle } from "./ThemeToggle";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -129,6 +130,7 @@ export function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             <a
               href="#contact"
               data-cursor="button"
@@ -200,6 +202,14 @@ export function Navbar() {
                 transition={{ delay: 0.4 }}
                 className="space-y-5"
               >
+                <a
+                  href={site.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-sm font-medium text-bone transition-colors hover:text-accent-bright"
+                >
+                  WhatsApp {site.phone}
+                </a>
                 <a
                   href={`mailto:${site.email}`}
                   className="block text-sm text-mute transition-colors hover:text-accent-bright"

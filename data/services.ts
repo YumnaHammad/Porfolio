@@ -87,27 +87,27 @@ export interface ValueProp {
 export const valueProps: ValueProp[] = [
   {
     title: "Design and engineering",
-    body: "I read a design the way a designer wrote it, and implement it the way an engineer has to maintain it. Nothing is lost in the handoff, because there isn't one.",
+    body: "No handoff gap — I read the design as intended and build it to be maintained.",
   },
   {
     title: "Product thinking",
-    body: "Pages are the easy part. I build the flows, states and edge cases that decide whether a product is actually usable once real data arrives.",
+    body: "The flows, states and edge cases that decide whether it survives real data.",
   },
   {
     title: "A current stack",
-    body: "React, Next.js, TypeScript, Tailwind, modern state tooling, motion libraries and AI-assisted workflows — chosen per problem, not by habit.",
+    body: "React, Next.js, Vue, TypeScript, Tailwind — chosen per problem, not by habit.",
   },
   {
     title: "Fast iteration",
-    body: "AI-assisted development compresses the distance between a concept and something clickable. You review real interfaces early, not descriptions of them.",
+    body: "AI-assisted development means you review real interfaces early, not descriptions.",
   },
   {
     title: "Responsive by default",
-    body: "Mobile is a layout decision made at the start, not a media query added at the end. Compositions are rebuilt per breakpoint, not shrunk.",
+    body: "Layouts rebuilt per breakpoint, not shrunk down at the end.",
   },
   {
     title: "Production mindset",
-    body: "Clean components, real API integration, accessible markup, performance budgets and a deployment that holds up after handover.",
+    body: "Clean components, real API integration, accessible markup, deployed and holding.",
   },
 ];
 

@@ -17,23 +17,30 @@ export const site = {
     "React.js",
     "Next.js",
     "TypeScript",
-    "Modern UI/UX",
-    "AI-Powered Development",
+    "Vue.js",
+    "AI Development",
   ],
   availability: "Available for freelance projects & product development",
 
   email: "yumnahammad4884@gmail.com",
 
+  /** Displayed as written locally; the tel:/wa.me links use E.164. */
+  phone: "0321 6774884",
+  phoneIntl: "+92 321 6774884",
+  phoneHref: "tel:+923216774884",
+  whatsapp: "https://wa.me/923216774884",
+
   /** Public profile URLs. Leave blank until the real URL is confirmed. */
-  linkedin: "",
-  github: "",
+  linkedin: "https://www.linkedin.com/in/yumnahammad/",
+  github: "https://github.com/YumnaHammad",
 
   /**
    * Hero portrait — 960x1280 (3:4), which the hero frame is sized to match so
    * the image fills it exactly. Any other ratio is letterboxed via
    * object-contain rather than cropped or distorted.
    */
-  portrait: "/assets/Yumna.jpeg",
+  /* Lowercase must match the file on disk — Linux hosts are case-sensitive. */
+  portrait: "/assets/yumna.png",
   portraitAlt: "Yumna Hammad, frontend developer, Islamabad",
 
   /** Used for canonical + Open Graph URLs. */

@@ -18,11 +18,18 @@ missing — so you can add them one at a time.
 
 ### 1. Your portrait — done
 
-`public/assets/Yumna.jpeg` (960×1280, 3:4) is wired up in `data/site.ts`:
+`public/assets/yumna.png` (960×1280, 3:4) is wired up in `data/site.ts`:
 
 ```ts
-portrait: "/assets/Yumna.jpeg",
+portrait: "/assets/yumna.png",
 ```
+
+That file is the background-removed cut-out, produced once locally with an
+ONNX background-removal model. The tooling was uninstalled afterwards rather
+than left as a 181MB dependency — to redo it, install
+`@imgly/background-removal-node`, run it against the source photo, and remove it
+again. Keep the filename lowercase: Linux hosts are case-sensitive, so
+`/assets/Yumna.png` would 404 on Vercel even though it works on Windows.
 
 The hero frame and the About card are both **3:4**, matching the source exactly,
 so it fills edge to edge with no letterboxing. It is rendered with
@@ -32,25 +39,30 @@ the dark palette; the subject itself is unaltered.
 
 To replace it, drop a new file in `public/assets/` and update that one line.
 
-### 2. LinkedIn and GitHub — `data/site.ts`
+### 2. Contact channels — done
+
+Phone, WhatsApp, LinkedIn and GitHub are all wired up in `data/site.ts`. Any
+value left as an empty string is simply omitted from the contact list, footer
+and structured data rather than rendering a dead link.
+
+Contact channels are ordered by directness (WhatsApp → phone → email →
+LinkedIn) and appear in the hero, the contact section, the footer and the mobile
+menu. `phone` is what's displayed; `phoneHref` and `whatsapp` carry the E.164
+number (`+923216774884`) that `tel:` and `wa.me` require.
+
+### 3. Project screenshots — `data/projects.ts`
+
+All 13 live URLs are attached. What's still missing is screenshots:
 
 ```ts
-linkedin: "https://www.linkedin.com/in/…",
-github:   "https://github.com/…",
-```
-
-While these are empty strings, the contact list, footer and structured data
-simply omit those rows.
-
-### 3. Project links and screenshots — `data/projects.ts`
-
-Per project:
-
-```ts
-liveUrl:   "https://…",              // renders a "Live" link when present
-githubUrl: "https://…",              // renders a repo link when present
 image:     "/projects/tools4pdf.jpg" // put screenshots in public/projects/
+githubUrl: "https://…",              // per-repo link, if you want one per project
 ```
+
+`liveUrl` is set on every project that has a public URL (the Funsol AI Editor
+has none, so its card simply shows no live link). `demoNote` carries a short
+line for demos that need sign-in — **never credentials**; this file ships to the
+browser.
 
 Without `image`, the card renders a **generated cover** — an abstract wireframe
 of that interface type, driven by the project's `motif`. It never pretends to be
@@ -114,6 +126,23 @@ lib/                    cn, ordinal, useMediaQuery, useReducedMotionSafe
 **Adding a project** is a single object in `data/projects.ts`. `layout` picks the
 card treatment (`feature` / `split` / `visual` / `stacked` / `rail`), and the case
 study renders only the sections that actually have content.
+
+## Theming
+
+Dark is the default identity; light is a full re-grade rather than an inversion.
+
+- Every colour is a token in `app/globals.css`. `:root` holds dark,
+  `[data-theme="light"]` overrides the same names — components never branch on
+  theme.
+- An inline script in `app/layout.tsx` stamps `data-theme` on `<html>` before
+  first paint (saved choice → system preference → dark), so there is no flash.
+  `<html>` carries `suppressHydrationWarning` because that divergence is
+  deliberate.
+- Atmospheric gradients are utilities (`wash-top`, `vignette`, `frame-falloff`…)
+  rather than inline styles, so both themes are graded in one place. The
+  generated project covers read `--plate-*` variables for the same reason.
+- The toggle sits in the navbar and reads the attribute through
+  `useSyncExternalStore`, so it can never disagree with the painted page.
 
 ## Notes on the implementation
 

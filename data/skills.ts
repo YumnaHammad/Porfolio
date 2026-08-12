@@ -51,7 +51,14 @@ export const clusters: SkillCluster[] = [
       { name: "JavaScript ES6+", level: "Core" },
       { name: "HTML5", level: "Core" },
       { name: "CSS3", level: "Core" },
-      { name: "Vue.js", level: "Working knowledge" },
+      {
+        name: "Vue.js",
+        level: "Core",
+        usedFor: [
+          "AI editor product at Funsol",
+          "Large, long-running application work",
+        ],
+      },
     ],
   },
   {

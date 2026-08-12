@@ -7,7 +7,7 @@ import { Marquee } from "@/components/ui/Marquee";
 import { Reveal } from "@/components/ui/Reveal";
 
 const paragraph =
-  "I design and build responsive, scalable digital experiences across SaaS, eCommerce, dashboards, business websites, interactive tools and custom systems.";
+  "Responsive, scalable interfaces across SaaS, eCommerce, dashboards and custom systems.";
 
 const lines = ["From Figma to production.", "From idea to interface.", "From interface to product."];
 

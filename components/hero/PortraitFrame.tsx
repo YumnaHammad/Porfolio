@@ -9,15 +9,16 @@ const floatingLabels = [
   { text: "React.js", top: "6%", left: "-14%", delay: 0 },
   { text: "Next.js", top: "34%", right: "-13%", delay: 0.8 },
   { text: "TypeScript", bottom: "22%", left: "-16%", delay: 1.6 },
-  { text: "Motion", bottom: "16%", right: "-12%", delay: 2.4 },
+  { text: "Vue.js", bottom: "16%", right: "-12%", delay: 2.4 },
 ];
 
 /**
- * The hero portrait sits inside a fixed 4:5 frame.
+ * The hero portrait sits inside a 3:4 frame, matching the source image so it
+ * fills edge to edge.
  *
- * The image is rendered with object-contain and centred, so any source ratio is
- * letterboxed against the frame rather than cropped, stretched or zoomed —
- * a face is never cut and proportions are never altered.
+ * The image is rendered with object-contain and centred, so any other source
+ * ratio is letterboxed rather than cropped, stretched or zoomed — a face is
+ * never cut and proportions are never altered.
  *
  * Until `site.portrait` is set, the frame renders a composed monogram plate so
  * the layout is complete and correctly proportioned in the meantime.
@@ -28,15 +29,11 @@ export function PortraitFrame() {
   return (
     /* Compact on phones so the headline still lands in the first viewport —
        the portrait stays visible, it just stops owning the whole screen. */
-    <div className="relative mx-auto w-full max-w-[17rem] sm:max-w-[22rem] lg:max-w-[30rem]">
+    <div className="relative mx-auto w-full max-w-[13.5rem] sm:max-w-[18rem] lg:max-w-[24rem]">
       {/* Atmospheric bloom behind the frame */}
       <div
         aria-hidden
-        className="absolute -inset-16 -z-10 rounded-full opacity-60 blur-3xl"
-        style={{
-          background:
-            "radial-gradient(circle at 60% 40%, rgba(124,92,255,0.28), transparent 62%)",
-        }}
+        className="subject-glow absolute -inset-16 -z-10 rounded-full opacity-70 blur-3xl"
       />
 
       <motion.div
@@ -57,31 +54,20 @@ export function PortraitFrame() {
 
           {site.portrait ? (
             <>
+              {/* The portrait is a cut-out on transparency, so a bloom behind
+                  the subject gives it something to stand against. */}
+              <div aria-hidden className="subject-glow absolute inset-0" />
               <Image
                 src={site.portrait}
                 alt={site.portraitAlt}
                 fill
                 priority
-                sizes="(max-width: 640px) 60vw, (max-width: 1024px) 22rem, 30rem"
+                sizes="(max-width: 640px) 60vw, (max-width: 1024px) 20rem, 24rem"
                 /* object-contain, never cover: a different source ratio would
                    letterbox rather than crop the subject or stretch it. */
-                className="object-contain object-center [filter:saturate(0.88)_contrast(1.06)_brightness(0.94)]"
+                className="object-contain object-center [filter:saturate(0.92)_contrast(1.04)] drop-shadow-[0_18px_40px_rgba(0,0,0,0.45)]"
               />
-              {/* Grade only — the photograph is a daylight exposure and the page
-                  is near-black, so a restrained accent wash and edge falloff let
-                  it sit in the palette without altering the subject. */}
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-accent/18 mix-blend-soft-light"
-              />
-              <div
-                aria-hidden
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "radial-gradient(75% 65% at 50% 38%, transparent 35%, rgba(8,8,10,0.55) 100%)",
-                }}
-              />
+              <div aria-hidden className="frame-falloff absolute inset-0" />
             </>
           ) : (
             <div className="absolute inset-0 grid place-items-center">
@@ -94,17 +80,10 @@ export function PortraitFrame() {
             </div>
           )}
 
-          {/* Daylight sky sits well above the face, so this only softens the
-              top edge into the page — the subject is untouched. */}
+          {/* Grounds the cut-out against the panel instead of ending abruptly */}
           <div
             aria-hidden
-            className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-ink/75 to-transparent"
-          />
-
-          {/* Top-to-bottom scrim keeps the metadata legible over any photo */}
-          <div
-            aria-hidden
-            className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink via-ink/60 to-transparent"
+            className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-ink to-transparent"
           />
 
           {/* Corner ticks */}
@@ -121,17 +100,6 @@ export function PortraitFrame() {
             />
           ))}
 
-          {/* In-frame metadata */}
-          <div className="absolute inset-x-5 bottom-5 hidden items-end justify-between sm:flex">
-            <div>
-              <p className="eyebrow text-accent">Currently</p>
-              <p className="mt-1 text-sm text-bone">
-                Associate Frontend Developer
-              </p>
-              <p className="text-xs text-mute">Funsol Technologies</p>
-            </div>
-            <p className="font-mono text-[10px] text-faint">ISB / PK</p>
-          </div>
         </div>
 
         {/* Floating technology labels */}

@@ -1,14 +1,25 @@
 "use client";
 
-import { ArrowUpRight, Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
+import { ArrowUpRight, Mail, Phone } from "lucide-react";
+import { GithubIcon, LinkedinIcon, WhatsappIcon } from "@/components/ui/BrandIcons";
 import { site } from "@/data/site";
 import { Reveal } from "@/components/ui/Reveal";
 import { TextReveal } from "@/components/ui/TextReveal";
 import { ContactForm } from "./ContactForm";
 
-/** Only channels with a real destination are rendered. */
+/**
+ * Ordered by how directly they reach me. Only channels with a real
+ * destination are rendered.
+ */
 const channels = [
+  {
+    label: "WhatsApp",
+    value: site.phone,
+    href: site.whatsapp,
+    Icon: WhatsappIcon,
+    external: true,
+  },
+  { label: "Phone", value: site.phoneIntl, href: site.phoneHref, Icon: Phone },
   { label: "Email", value: site.email, href: `mailto:${site.email}`, Icon: Mail },
   site.linkedin && {
     label: "LinkedIn",
@@ -40,13 +51,7 @@ export function Contact() {
     >
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="grid-field absolute inset-0 opacity-40" />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(70% 50% at 50% 100%, rgba(124,92,255,0.16), transparent 70%)",
-          }}
-        />
+        <div className="wash-bottom absolute inset-0" />
       </div>
 
       <div className="shell">
@@ -113,9 +118,19 @@ export function Contact() {
                   </p>
                 </div>
                 <p className="mt-4 text-sm leading-relaxed text-mute">
-                  {site.availability}, alongside my on-site role at Funsol
-                  Technologies. Based in {site.location} — working with clients
+                  {site.availability}. Based in {site.location}, working
                   remotely across time zones.
+                </p>
+                <p className="mt-4 text-sm text-bone">
+                  Fastest reply:{" "}
+                  <a
+                    href={site.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium underline-offset-4 transition-colors hover:text-accent-bright hover:underline"
+                  >
+                    WhatsApp {site.phone}
+                  </a>
                 </p>
               </div>
             </Reveal>

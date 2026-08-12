@@ -58,7 +58,7 @@ export default function OpenGraphImage() {
               maxWidth: 940,
             }}
           >
-            <span>Building digital products that feel as good as they&nbsp;</span>
+            <span>I turn ideas into digital products that&nbsp;</span>
             <span style={{ color: "#9b83ff" }}>work.</span>
           </div>
           <div style={{ marginTop: 28, fontSize: 26, color: "#8b8b96" }}>

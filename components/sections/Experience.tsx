@@ -22,7 +22,7 @@ export function Experience() {
   });
 
   return (
-    <section id="experience" className="section-pad relative">
+    <section id="experience" className="section-edge section-pad relative">
       <div className="shell">
         <SectionHeading
           index="04"

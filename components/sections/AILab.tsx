@@ -134,15 +134,8 @@ const bench = [
 
 export function AILab() {
   return (
-    <section id="ai" className="section-pad relative overflow-hidden">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(55% 40% at 80% 15%, rgba(124,92,255,0.10), transparent 70%)",
-        }}
-      />
+    <section id="ai" className="section-edge section-pad relative overflow-hidden">
+      <div aria-hidden className="wash-corner pointer-events-none absolute inset-0 -z-10" />
 
       <div className="shell">
         <SectionHeading
@@ -156,14 +149,13 @@ export function AILab() {
           <Reveal direction="right">
             <div className="lg:sticky lg:top-32">
               <p className="text-lg leading-relaxed text-mute">
-                I use AI the way I use any other tool in the stack: where it
-                removes work that shouldn&rsquo;t be manual. Prompt engineering
-                to get repeatable output. AI-assisted implementation to get to a
-                reviewable interface sooner. Generated voice and video as source
-                material inside pipelines I still build and control.
+                I use AI where it removes work that shouldn&rsquo;t be manual —
+                prompt engineering for repeatable output, AI-assisted
+                implementation for a reviewable interface sooner, generated
+                voice and video inside pipelines I still build.
               </p>
               <p className="mt-6 text-lg leading-relaxed text-mute">
-                The engineering doesn&rsquo;t get skipped — it gets to start
+                The engineering doesn&rsquo;t get skipped. It gets to start
                 earlier.
               </p>
 

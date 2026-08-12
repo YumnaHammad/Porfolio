@@ -20,16 +20,13 @@ export const roles: Role[] = [
     mode: "On-site",
     current: true,
     summary:
-      "Building production web applications and SaaS interfaces in a professional engineering team.",
+      "Frontend developer on an AI editor built in Vue.js — a large, long-running product — alongside React and Next.js work.",
     highlights: [
-      "Developing modern web applications with React.js and Next.js",
-      "Building scalable, reusable frontend architectures",
-      "Developing responsive SaaS interfaces",
-      "Building PDF-related tools and applications",
-      "Integrating REST APIs, file uploads and dynamic application flows",
-      "Implementing modern UI systems from reusable components",
-      "Improving frontend performance and responsive behaviour",
-      "Working with modern AI-assisted development workflows",
+      "Frontend development of an AI-powered editor built in Vue.js",
+      "React.js and Next.js applications with reusable architectures",
+      "Responsive SaaS interfaces and PDF tooling",
+      "REST API integration, file uploads and dynamic flows",
+      "AI-assisted development workflows",
     ],
   },
   {
@@ -41,14 +38,12 @@ export const roles: Role[] = [
     mode: "Remote",
     current: true,
     summary:
-      "20+ projects delivered directly for clients — eCommerce platforms, dashboards, SaaS products, business sites and custom frontend systems.",
+      "20+ projects delivered directly for clients, remote.",
     highlights: [
       "eCommerce platforms and storefronts",
-      "Admin dashboards and internal systems",
-      "SaaS applications and interactive tools",
-      "Business and portfolio websites",
-      "API-integrated, custom frontend systems",
-      "AI-related products and workflows",
+      "Admin dashboards and SaaS applications",
+      "Business websites and interactive tools",
+      "API-integrated custom frontend systems",
     ],
   },
   {
@@ -58,12 +53,10 @@ export const roles: Role[] = [
     year: "2025",
     location: "Remote",
     mode: "Remote",
-    summary:
-      "Enterprise web application development with a modern TypeScript frontend stack.",
+    summary: "Enterprise web applications on a modern TypeScript stack.",
     highlights: [
-      "Built enterprise web applications with React.js, Next.js and TypeScript",
-      "Implemented state management with Redux Toolkit and Context API",
-      "Worked within a modern frontend architecture",
+      "React.js, Next.js and TypeScript applications",
+      "State management with Redux Toolkit and Context API",
     ],
   },
   {
@@ -73,13 +66,10 @@ export const roles: Role[] = [
     year: "2025",
     location: "Pakistan",
     mode: "On-site",
-    summary:
-      "Designed and developed an inventory management system alongside operational and business work.",
+    summary: "Built an inventory management system on the MERN stack.",
     highlights: [
-      "Designed and developed an Inventory Management System on the MERN stack",
-      "Handled operational and development tasks",
-      "Worked on digital marketing activities",
-      "Contributed to customer engagement and business workflows",
+      "Designed and developed an Inventory Management System (MERN)",
+      "Operational, development and digital marketing work",
     ],
   },
   {
@@ -89,12 +79,10 @@ export const roles: Role[] = [
     year: "2023",
     location: "Pakistan",
     mode: "On-site",
-    summary:
-      "IT operations and technical support across company computer systems and networks.",
+    summary: "IT operations and technical support.",
     highlights: [
-      "IT operations and technical support",
-      "Computer systems and networks",
-      "Troubleshooting and system documentation",
+      "Computer systems, networks and troubleshooting",
+      "System documentation",
     ],
   },
   {
@@ -104,11 +92,9 @@ export const roles: Role[] = [
     year: "2022",
     location: "Pakistan",
     mode: "On-site",
-    summary:
-      "Early professional frontend work — React development inside a collaborative team process.",
+    summary: "Early professional frontend work in a team process.",
     highlights: [
       "React.js development and responsive interfaces",
-      "Modern JavaScript and frontend workflows",
       "Collaboration, planning and code reviews",
     ],
   },
