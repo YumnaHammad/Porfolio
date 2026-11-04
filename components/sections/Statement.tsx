@@ -1,109 +1,76 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
-import { useReducedMotionSafe } from "@/lib/useMediaQuery";
-import { Marquee } from "@/components/ui/Marquee";
-import { Reveal } from "@/components/ui/Reveal";
+import { Database, Monitor, Server, type LucideIcon } from "lucide-react";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Stagger, StaggerItem } from "@/components/ui/Reveal";
 
-const paragraph =
-  "Responsive, scalable interfaces across SaaS, eCommerce, dashboards and custom systems.";
-
-const lines = ["From Figma to production.", "From idea to interface.", "From interface to product."];
-
-const ribbon = [
-  "React.js",
-  "Next.js",
-  "TypeScript",
-  "Tailwind CSS",
-  "Redux Toolkit",
-  "React Query",
-  "Framer Motion",
-  "GSAP",
-  "Remotion",
-  "MongoDB",
-  "REST APIs",
-  "Vercel",
+const layers: {
+  icon: LucideIcon;
+  title: string;
+  body: string;
+  tech: string[];
+}[] = [
+  {
+    icon: Monitor,
+    title: "Frontend",
+    body: "Responsive, fast interfaces for SaaS, eCommerce, dashboards and custom systems — from Figma to production.",
+    tech: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "Redux Toolkit", "Framer Motion"],
+  },
+  {
+    icon: Server,
+    title: "Backend",
+    body: "REST APIs, authentication and business logic that the interface can rely on.",
+    tech: ["Node.js", "Express", "REST APIs", "Auth & roles"],
+  },
+  {
+    icon: Database,
+    title: "Database & Deploy",
+    body: "Data models that hold up, shipped and running on the web.",
+    tech: ["MongoDB", "Vercel", "Git", "CI basics"],
+  },
 ];
 
-function Word({
-  children,
-  range,
-  progress,
-}: {
-  children: string;
-  range: [number, number];
-  progress: MotionValue<number>;
-}) {
-  const opacity = useTransform(progress, range, [0.14, 1]);
-  return (
-    <motion.span style={{ opacity }} className="mr-[0.28em] inline-block">
-      {children}
-    </motion.span>
-  );
-}
-
 export function Statement() {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotionSafe();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.85", "start 0.25"],
-  });
-
-  const words = paragraph.split(" ");
-
   return (
-    <section className="section-pad relative">
+    <section className="relative py-16 md:py-24">
       <div className="shell">
-        {/* Three-line manifesto */}
-        <div className="mb-20 md:mb-28">
-          {lines.map((line, i) => (
-            <div key={line} className="overflow-hidden pb-[0.06em]">
-              <motion.p
-                initial={{ y: reduced ? 0 : "105%", opacity: reduced ? 0 : 1 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true, margin: "0px 0px -20% 0px" }}
-                transition={{
-                  duration: 1,
-                  delay: i * 0.12,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="display text-[2rem] leading-[1.06] sm:text-5xl lg:text-[4rem]"
-              >
-                <span className={i === 2 ? "text-bone" : "text-mute"}>{line}</span>
-              </motion.p>
-            </div>
-          ))}
-        </div>
+        <SectionHeading
+          index="01"
+          label="What I do"
+          title="One developer. The whole stack."
+          lede="From the first screen to the database behind it — one person who can build, connect and ship all of it."
+        />
 
-        {/* Scroll-linked paragraph — words resolve as the section is read */}
-        <div ref={ref} className="grid gap-10 lg:grid-cols-[auto_1fr] lg:gap-20">
-          <Reveal direction="none" className="lg:pt-3">
-            <div className="flex items-center gap-3 lg:flex-col lg:items-start">
-              <span className="eyebrow text-accent">01</span>
-              <span className="h-px w-8 bg-line lg:mt-2 lg:w-14" aria-hidden />
-            </div>
-          </Reveal>
-
-          <p className="max-w-4xl text-xl leading-[1.5] tracking-tight sm:text-2xl lg:text-[2rem] lg:leading-[1.45]">
-            {reduced
-              ? paragraph
-              : words.map((word, i) => (
-                  <Word
-                    key={`${word}-${i}`}
-                    progress={scrollYProgress}
-                    range={[i / words.length, (i + 1.6) / words.length]}
-                  >
-                    {word}
-                  </Word>
-                ))}
-          </p>
-        </div>
-      </div>
-
-      <div className="mt-20 md:mt-28">
-        <Marquee items={ribbon} />
+        <Stagger className="grid gap-5 md:grid-cols-3">
+          {layers.map((layer, i) => {
+            const Icon = layer.icon;
+            return (
+              <StaggerItem key={layer.title} className="h-full">
+                <div className="card-pro group h-full p-8">
+                  <span className={`${i === 1 ? "icon-tile-hot" : "icon-tile"} h-12 w-12 transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110`}>
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <h3 className="mt-6 text-xl font-semibold tracking-tight">
+                    {layer.title}
+                  </h3>
+                  <p className="mt-3 text-[15px] leading-relaxed text-mute">
+                    {layer.body}
+                  </p>
+                  <ul className="mt-6 flex flex-wrap gap-2">
+                    {layer.tech.map((t) => (
+                      <li
+                        key={t}
+                        className="rounded-full border border-accent/25 bg-accent/10 px-3 py-1 font-mono text-[11px] font-medium text-accent-bright"
+                      >
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </StaggerItem>
+            );
+          })}
+        </Stagger>
       </div>
     </section>
   );

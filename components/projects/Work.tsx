@@ -8,7 +8,13 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { ProjectModal } from "./ProjectModal";
-import { FeatureCard, SplitCard, VisualCard, StackedCard } from "./ProjectCards";
+import {
+  FeatureCard,
+  SplitCard,
+  VisualCard,
+  StackedCard,
+  LiveDemoButton,
+} from "./ProjectCards";
 import { ordinal } from "@/lib/utils";
 
 /* The rail pulls in GSAP + ScrollTrigger — kept out of the initial bundle
@@ -86,17 +92,7 @@ export function Work() {
                     </span>
                   </button>
 
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 text-xs text-mute transition-colors hover:border-accent hover:text-accent-bright"
-                    >
-                      Live
-                      <ArrowUpRight className="h-3 w-3" />
-                    </a>
-                  )}
+                  <LiveDemoButton project={project} size="sm" />
                 </li>
               ))}
             </ul>

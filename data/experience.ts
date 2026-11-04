@@ -30,20 +30,37 @@ export const roles: Role[] = [
     ],
   },
   {
+    company: "Zetfair",
+    position: "Full-Stack Developer",
+    period: "Present",
+    year: "Now",
+    location: "Pakistan",
+    mode: "Remote",
+    current: true,
+    summary:
+      "Full-stack developer at Zetfair, building client products end to end across frontend, APIs and databases.",
+    highlights: [
+      "Full-stack web applications, frontend to backend",
+      "Client eCommerce storefronts and business websites",
+      "REST API design, integration and database work",
+      "Delivery for multiple clients in parallel",
+    ],
+  },
+  {
     company: "Freelance",
-    position: "Frontend & Full-Stack Developer",
+    position: "Full-Stack Developer — Multiple Clients",
     period: "February 2022 — Present",
     year: "2022",
     location: "Remote",
     mode: "Remote",
     current: true,
     summary:
-      "20+ projects delivered directly for clients, remote.",
+      "Full-stack developer working with many clients directly — 20+ projects delivered, remote.",
     highlights: [
-      "eCommerce platforms and storefronts",
-      "Admin dashboards and SaaS applications",
-      "Business websites and interactive tools",
-      "API-integrated custom frontend systems",
+      "eCommerce platforms and storefronts for retail brands",
+      "Admin dashboards, inventory systems and SaaS applications",
+      "Company profile and business websites",
+      "API-integrated custom full-stack systems",
     ],
   },
   {

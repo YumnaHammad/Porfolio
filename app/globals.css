@@ -11,12 +11,12 @@
 ------------------------------------------------------------------ */
 @theme {
   /* Dark (default) */
-  --color-ink: #08080a;
-  --color-ink-2: #0c0c10;
-  --color-surface: #101015;
-  --color-surface-2: #16161d;
-  --color-line: #22222c;
-  --color-line-soft: #191921;
+  --color-ink: #070b14;
+  --color-ink-2: #0b111d;
+  --color-surface: #0f1726;
+  --color-surface-2: #152036;
+  --color-line: #22304a;
+  --color-line-soft: #17213a;
 
   --color-bone: #ececed;
   --color-mute: #8b8b96;
@@ -24,9 +24,11 @@
      go quieter than this without failing contrast. */
   --color-faint: #7a7a86;
 
-  --color-accent: #7c5cff;
-  --color-accent-bright: #9b83ff;
-  --color-accent-deep: #4a2fd6;
+  --color-accent: #3b82f6;
+  --color-accent-bright: #60a5fa;
+  --color-accent-deep: #1d4ed8;
+  /* Second brand colour: red. Blue leads, red punctuates. */
+  --color-hot: #fb4b63;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono-jb), ui-monospace, "SFMono-Regular", monospace;
@@ -43,42 +45,43 @@
   --grain-opacity: 0.035;
 
   /* Alternating section ground — a visible step, not a guess */
-  --section-alt-bg: #0e0e13;
+  --section-alt-bg: #0b1426;
 
   /* Generated project-cover palette (components/projects/ProjectPlate.tsx) */
-  --plate-stroke: rgb(155 131 255 / 0.55);
+  --plate-stroke: rgb(96 165 250 / 0.6);
   --plate-faint: rgb(236 236 237 / 0.14);
-  --plate-solid: rgb(124 92 255 / 0.22);
+  --plate-solid: rgb(59 130 246 / 0.22);
 }
 
 [data-theme="light"] {
   color-scheme: light;
 
-  --color-ink: #f7f7f8;
-  --color-ink-2: #ffffff;
+  --color-ink: #ffffff;
+  --color-ink-2: #f6f9ff;
   --color-surface: #ffffff;
-  --color-surface-2: #f0f0f2;
-  --color-line: #dcdce2;
-  --color-line-soft: #e8e8ec;
+  --color-surface-2: #eaf1ff;
+  --color-line: #d3dff5;
+  --color-line-soft: #e4ecfa;
 
-  --color-bone: #131316;
-  --color-mute: #55555f;
+  --color-bone: #0b1530;
+  --color-mute: #4a5673;
   /* 4.5:1 against the light ground */
-  --color-faint: #67676f;
+  --color-faint: #5b6784;
 
-  --color-accent: #6544e8;
-  --color-accent-bright: #5433d8;
-  --color-accent-deep: #4526bd;
+  --color-accent: #1d4ed8;
+  --color-accent-bright: #1e40af;
+  --color-accent-deep: #1e3a8a;
+  --color-hot: #e11d48;
 
   --glow: 0.07;
   --glow-strong: 0.1;
   --grain-opacity: 0.02;
 
-  --section-alt-bg: #ffffff;
+  --section-alt-bg: #eef4ff;
 
-  --plate-stroke: rgb(84 51 216 / 0.5);
-  --plate-faint: rgb(19 19 22 / 0.14);
-  --plate-solid: rgb(101 68 232 / 0.14);
+  --plate-stroke: rgb(29 78 216 / 0.5);
+  --plate-faint: rgb(11 21 48 / 0.14);
+  --plate-solid: rgb(29 78 216 / 0.14);
 }
 
 /* ------------------------------------------------------------------
@@ -231,7 +234,7 @@ body {
 @utility wash-corner {
   background: radial-gradient(
     55% 40% at 80% 15%,
-    color-mix(in srgb, var(--color-accent) calc(var(--glow) * 100%), transparent),
+    color-mix(in srgb, var(--color-hot) calc(var(--glow) * 100%), transparent),
     transparent 70%
   );
 }
@@ -267,14 +270,102 @@ body {
    Alternating ground + a hairline gives each section a clear edge
    without adding any decoration.
 ------------------------------------------------------------------ */
+/* Tinted blue ground, capped by a blue-to-red bar. */
 @utility section-alt {
+  position: relative;
   background-color: var(--section-alt-bg);
-  border-top: 1px solid var(--color-line-soft);
   border-bottom: 1px solid var(--color-line-soft);
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-hot));
+  }
 }
 
+/* White ground, soft blue and red blooms in opposite corners. */
 @utility section-edge {
+  position: relative;
   border-top: 1px solid var(--color-line-soft);
+  background-image:
+    radial-gradient(45% 35% at 0% 0%, color-mix(in srgb, var(--color-accent) 9%, transparent), transparent 70%),
+    radial-gradient(40% 30% at 100% 100%, color-mix(in srgb, var(--color-hot) 7%, transparent), transparent 70%);
+}
+
+/* ---- Cards ------------------------------------------------------
+   One card language for the whole page: raised surface, a short
+   blue-to-red bar that runs the full width on hover, soft blue glow.
+------------------------------------------------------------------ */
+@utility card-pro {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-line);
+  box-shadow:
+    0 1px 2px rgb(11 21 48 / 0.04),
+    0 18px 40px -24px color-mix(in srgb, var(--color-accent) 45%, transparent);
+  transition:
+    transform 0.5s var(--ease-out-expo),
+    box-shadow 0.5s var(--ease-out-expo),
+    border-color 0.5s;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto auto 0;
+    height: 3px;
+    width: 3rem;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-hot));
+    transition: width 0.6s var(--ease-out-expo);
+  }
+  &:hover {
+    transform: translateY(-5px);
+    border-color: color-mix(in srgb, var(--color-accent) 50%, var(--color-line));
+    box-shadow:
+      0 2px 4px rgb(11 21 48 / 0.05),
+      0 28px 56px -22px color-mix(in srgb, var(--color-accent) 60%, transparent);
+  }
+  &:hover::before {
+    width: 100%;
+  }
+}
+
+/* Solid blue tile that carries an icon or number. */
+@utility icon-tile {
+  display: grid;
+  place-items: center;
+  border-radius: 0.875rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-deep));
+  box-shadow: 0 10px 22px -10px color-mix(in srgb, var(--color-accent) 80%, transparent);
+}
+
+/* Same tile in maroon/red, for alternating cards. */
+@utility icon-tile-hot {
+  display: grid;
+  place-items: center;
+  border-radius: 0.875rem;
+  color: #fff;
+  background: linear-gradient(135deg, #e11d48, #7f1034);
+  box-shadow: 0 10px 22px -10px rgb(190 18 60 / 0.8);
+}
+
+/* Full-bleed deep-blue band with a red glow; text on it is always white. */
+@utility band-blue {
+  color: #fff;
+  background:
+    radial-gradient(50% 120% at 100% 0%, rgb(225 29 72 / 0.35), transparent 60%),
+    radial-gradient(60% 120% at 0% 100%, rgb(59 130 246 / 0.35), transparent 60%),
+    linear-gradient(135deg, #0a1f6b, #1236b8 55%, #0b2a8a);
+}
+
+/* Blue-to-red text, for a single emphasised line. */
+@utility text-brand {
+  background-image: linear-gradient(90deg, var(--color-accent), var(--color-hot));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* ------------------------------------------------------------------

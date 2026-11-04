@@ -76,7 +76,7 @@ export function Hero() {
                   >
                     {i === 2 ? (
                       <>
-                        that <span className="text-accent-bright">work.</span>
+                        That <span className="text-hot">Work.</span>
                       </>
                     ) : (
                       line
@@ -93,8 +93,8 @@ export function Hero() {
               transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="mt-6 max-w-md text-[15px] leading-relaxed text-mute md:text-base"
             >
-              Frontend developer, full-stack capable. I build SaaS products,
-              dashboards and eCommerce that ship.
+              Full-stack developer working with many clients. I build SaaS products,
+              dashboards, inventory systems and eCommerce that ship.
             </motion.p>
 
             {/* Contact is the primary action — the reason this page exists. */}

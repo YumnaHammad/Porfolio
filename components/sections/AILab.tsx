@@ -164,7 +164,7 @@ export function AILab() {
                   (t) => (
                     <span
                       key={t}
-                      className="rounded-full border border-line px-4 py-2 font-mono text-[11px] text-mute"
+                      className="rounded-full border border-accent/30 bg-accent/10 px-4 py-2 font-mono text-[11px] font-medium text-accent-bright"
                     >
                       {t}
                     </span>
@@ -178,9 +178,9 @@ export function AILab() {
           <div className="space-y-4">
             {bench.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.08}>
-                <div className="grain group relative overflow-hidden rounded-2xl border border-line bg-ink-2/70 p-6 transition-colors duration-500 hover:border-accent/40">
+                <div className="card-pro group p-6">
                   <div className="mb-2 flex items-center justify-between">
-                    <h3 className="text-sm font-medium tracking-tight">
+                    <h3 className="text-base font-semibold tracking-tight">
                       {item.title}
                     </h3>
                     <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">
@@ -195,21 +195,18 @@ export function AILab() {
         </div>
 
         {/* Capability cards */}
-        <Stagger className="mt-20 grid gap-px overflow-hidden rounded-2xl border border-line-soft bg-line-soft sm:grid-cols-2 lg:grid-cols-3">
+        <Stagger className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {aiCapabilities.map((cap) => (
-            <StaggerItem
-              key={cap.name}
-              className="group relative bg-ink p-7 transition-colors duration-500 hover:bg-ink-2"
-            >
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="text-lg font-medium tracking-tight transition-colors group-hover:text-accent-bright">
-                  {cap.name}
-                </h3>
-                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-faint">
+            <StaggerItem key={cap.name} className="h-full">
+              <div className="card-pro group h-full p-7">
+                <span className="inline-block rounded-full bg-accent/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-accent-bright">
                   {cap.role}
                 </span>
+                <h3 className="mt-4 text-xl font-semibold tracking-tight">
+                  {cap.name}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-mute">{cap.body}</p>
               </div>
-              <p className="mt-3 text-sm leading-relaxed text-mute">{cap.body}</p>
             </StaggerItem>
           ))}
         </Stagger>

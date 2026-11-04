@@ -9,9 +9,9 @@
 export const site = {
   name: "Yumna Hammad",
   monogram: "YH",
-  role: "Frontend Developer & Full-Stack Developer",
+  role: "Full-Stack Developer",
   positioning:
-    "Frontend Specialist · Full-Stack Capable · AI & Prompt Engineer",
+    "Full-Stack Developer · React & Next.js · AI & Prompt Engineer",
   location: "Islamabad, Pakistan",
   specialisation: [
     "React.js",
@@ -41,7 +41,7 @@ export const site = {
    */
   /* Lowercase must match the file on disk — Linux hosts are case-sensitive. */
   portrait: "/assets/yumna.png",
-  portraitAlt: "Yumna Hammad, frontend developer, Islamabad",
+  portraitAlt: "Yumna Hammad, full-stack developer, Islamabad",
 
   /** Used for canonical + Open Graph URLs. */
   url: "https://yumnahammad.com",
@@ -62,5 +62,5 @@ export const stats = [
   { value: 20, suffix: "+", label: "Freelance projects delivered" },
   { value: 4, suffix: "+", label: "Years building for the web" },
   { value: 2022, label: "Freelancing since", plain: true },
-  { value: 2026, label: "On-site engineering at Funsol", plain: true },
+  { value: 2026, label: "Engineering at Funsol Technologies", plain: true },
 ] as const;

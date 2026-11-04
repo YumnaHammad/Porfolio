@@ -48,8 +48,8 @@ export function MagneticButton({
 
   const styles =
     variant === "primary"
-      ? "bg-bone text-ink hover:bg-accent-bright hover:text-white"
-      : "border border-line text-bone hover:border-accent hover:text-accent-bright";
+      ? "bg-bone text-ink hover:bg-hot hover:text-white"
+      : "border border-line text-bone hover:border-hot hover:text-hot";
 
   const inner = (
     <>

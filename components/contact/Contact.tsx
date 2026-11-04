@@ -66,7 +66,7 @@ export function Contact() {
         <TextReveal
           as="h2"
           text="Let's build something people remember."
-          className="display max-w-[14ch] text-[2.5rem] leading-[1.02] sm:text-6xl lg:text-8xl"
+          className="display max-w-[18ch] text-[2rem] leading-[1.1] sm:text-5xl lg:text-6xl"
         />
 
         <Reveal delay={0.15}>

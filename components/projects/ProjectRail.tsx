@@ -75,7 +75,7 @@ export function ProjectRail({
             <div className="mb-4 flex items-center gap-3">
               <span className="eyebrow text-accent">More work</span>
             </div>
-            <h3 className="display text-3xl sm:text-5xl">Selected projects</h3>
+            <h3 className="display text-2xl sm:text-4xl">Selected projects</h3>
           </div>
           <p className="hidden items-center gap-2.5 font-mono text-[11px] text-faint lg:flex">
             Scroll to explore <MoveRight className="h-4 w-4" />

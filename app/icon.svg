@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="YH">
+  <!--
+    Favicon. Vector so it stays sharp at every size, and a solid violet field
+    so it reads on both light and dark browser tab bars.
+
+    A single bold Y rather than the "YH" monogram: at 16px two letters collapse
+    into noise, whereas one heavy letterform stays recognisable.
+  -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8f72ff"/>
+      <stop offset="1" stop-color="#4a2fd6"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#g)"/>
+  <path d="M19 19 L32 33.5 L45 19"
+        fill="none" stroke="#fff" stroke-width="7.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M32 33.5 L32 46"
+        fill="none" stroke="#fff" stroke-width="7.5" stroke-linecap="round"/>
+</svg>

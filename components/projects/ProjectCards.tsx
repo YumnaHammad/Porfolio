@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useReducedMotionSafe } from "@/lib/useMediaQuery";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/ui/BrandIcons";
 import type { Project } from "@/data/projects";
 import { ProjectPlate } from "./ProjectPlate";
@@ -50,31 +50,54 @@ function Tech({ items, max = 5 }: { items: string[]; max?: number }) {
   );
 }
 
+/**
+ * The live site is the strongest proof a project exists, so it gets the
+ * primary control on every card. Exported so the rail and the overflow list
+ * use the exact same affordance.
+ */
+export function LiveDemoButton({
+  project,
+  size = "md",
+}: {
+  project: Project;
+  size?: "sm" | "md";
+}) {
+  if (!project.liveUrl) return null;
+
+  return (
+    <a
+      href={project.liveUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={(e) => e.stopPropagation()}
+      aria-label={`Open the live ${project.title} site in a new tab`}
+      className={cn(
+        "group/live inline-flex items-center gap-2 rounded-full bg-accent font-medium text-white transition-colors duration-300 hover:bg-accent-bright",
+        size === "sm" ? "px-4 py-2 text-xs" : "px-5 py-2.5 text-sm",
+      )}
+    >
+      <ExternalLink className={size === "sm" ? "h-3.5 w-3.5" : "h-4 w-4"} />
+      Live Demo
+    </a>
+  );
+}
+
 function Links({ project, onOpen }: { project: Project; onOpen: (p: Project) => void }) {
   return (
-    <div className="flex flex-wrap items-center gap-5">
+    <div className="flex flex-wrap items-center gap-4">
+      <LiveDemoButton project={project} />
+
       <button
         type="button"
         onClick={() => onOpen(project)}
         className="group/cta inline-flex items-center gap-2 text-sm font-medium tracking-tight transition-colors hover:text-accent-bright"
       >
-        Read case study
+        Case study
         <span className="grid h-7 w-7 place-items-center rounded-full border border-line transition-all duration-300 group-hover/cta:border-accent group-hover/cta:bg-accent group-hover/cta:text-white">
           <ArrowUpRight className="h-3.5 w-3.5" />
         </span>
       </button>
 
-      {project.liveUrl && (
-        <a
-          href={project.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className="inline-flex items-center gap-1.5 text-sm text-mute transition-colors hover:text-accent-bright"
-        >
-          Live <ArrowUpRight className="h-3.5 w-3.5" />
-        </a>
-      )}
       {project.githubUrl && (
         <a
           href={project.githubUrl}
@@ -88,6 +111,20 @@ function Links({ project, onOpen }: { project: Project; onOpen: (p: Project) => 
         </a>
       )}
     </div>
+  );
+}
+
+/** At-a-glance marker so a visitor can see which projects are visitable. */
+function LiveBadge({ project }: { project: Project }) {
+  if (!project.liveUrl) return null;
+  return (
+    <span className="absolute right-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full border border-line bg-ink/75 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-bone backdrop-blur-sm">
+      <span className="relative flex h-1.5 w-1.5">
+        <span className="animate-pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-500" />
+        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+      </span>
+      Live
+    </span>
   );
 }
 
@@ -124,6 +161,7 @@ function Well({
         aria-hidden
         className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-40"
       />
+      <LiveBadge project={project} />
     </div>
   );
 }
@@ -141,7 +179,7 @@ export function FeatureCard({ project, index, onOpen, priority }: CardProps) {
             <span className="h-px w-10 bg-line" aria-hidden />
             <span className="eyebrow">{project.category}</span>
           </div>
-          <h3 className="display text-4xl sm:text-6xl lg:text-7xl">{project.title}</h3>
+          <h3 className="display text-3xl sm:text-4xl lg:text-5xl">{project.title}</h3>
         </div>
         <span className="hidden rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-accent-bright md:block">
           Featured
@@ -154,7 +192,7 @@ export function FeatureCard({ project, index, onOpen, priority }: CardProps) {
         onOpen={onOpen}
         priority={priority}
         sizes="(max-width: 1024px) 100vw, 90vw"
-        className="aspect-4/3 md:aspect-21/9"
+        className="aspect-16/10 md:aspect-[2.6/1]"
       />
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
@@ -205,7 +243,7 @@ export function SplitCard({
           index={index}
           onOpen={onOpen}
           sizes="(max-width: 1024px) 100vw, 55vw"
-          className="aspect-4/3 lg:aspect-16/11"
+          className="aspect-16/10 lg:aspect-16/9"
         />
       </div>
 
@@ -215,7 +253,7 @@ export function SplitCard({
           <span className="h-px w-8 bg-line" aria-hidden />
           <span className="eyebrow">{project.category}</span>
         </div>
-        <h3 className="display text-3xl sm:text-5xl">{project.title}</h3>
+        <h3 className="display text-2xl sm:text-3xl">{project.title}</h3>
         <p className="mt-5 max-w-md leading-relaxed text-mute">{project.description}</p>
         <div className="mt-6">
           <Tech items={project.technologies} />
@@ -240,7 +278,7 @@ export function VisualCard({ project, index, onOpen }: CardProps) {
         index={index}
         onOpen={onOpen}
         sizes="100vw"
-        className="aspect-4/5 sm:aspect-16/10 lg:aspect-21/9"
+        className="aspect-16/10 lg:aspect-[2.4/1]"
       />
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 p-6 md:p-12">
@@ -248,7 +286,7 @@ export function VisualCard({ project, index, onOpen }: CardProps) {
           <span className="eyebrow text-accent">{index}</span>
           <span className="eyebrow">{project.category}</span>
         </div>
-        <h3 className="display text-3xl sm:text-5xl lg:text-6xl">{project.title}</h3>
+        <h3 className="display text-2xl sm:text-4xl lg:text-4xl">{project.title}</h3>
         <p className="mt-4 max-w-xl leading-relaxed text-mute">{project.description}</p>
         <div className="pointer-events-auto mt-6 flex flex-wrap items-center gap-6">
           <Links project={project} onOpen={onOpen} />
@@ -275,7 +313,7 @@ export function StackedCard({ project, index, onOpen }: CardProps) {
               <span className="h-px w-8 bg-line" aria-hidden />
               <span className="eyebrow">{project.category}</span>
             </div>
-            <h3 className="display text-3xl sm:text-5xl">{project.title}</h3>
+            <h3 className="display text-2xl sm:text-3xl">{project.title}</h3>
             <p className="mt-5 leading-relaxed text-mute">{project.description}</p>
           </div>
 
@@ -298,7 +336,7 @@ export function StackedCard({ project, index, onOpen }: CardProps) {
           index={index}
           onOpen={onOpen}
           sizes="(max-width: 1024px) 100vw, 50vw"
-          className="aspect-4/3 lg:aspect-auto lg:min-h-[26rem]"
+          className="aspect-16/10 lg:aspect-auto lg:min-h-[18rem]"
         />
       </div>
     </article>
@@ -314,7 +352,7 @@ export function RailCard({ project, index, onOpen }: CardProps) {
       <div
         onClick={() => onOpen(project)}
         data-cursor="view"
-        className="group relative aspect-4/3 cursor-pointer overflow-hidden rounded-2xl border border-line bg-surface transition-colors duration-500 hover:border-accent/50"
+        className="group relative aspect-16/10 cursor-pointer overflow-hidden rounded-2xl border border-line bg-surface transition-colors duration-500 hover:border-accent/50"
       >
         <ProjectPlate project={project} sizes="(max-width: 1024px) 78vw, 30rem" />
         <div
@@ -324,6 +362,7 @@ export function RailCard({ project, index, onOpen }: CardProps) {
         <span className="absolute left-5 top-5 font-mono text-[11px] text-accent-bright">
           {index}
         </span>
+        <LiveBadge project={project} />
       </div>
 
       <div className="mt-6">
@@ -335,18 +374,16 @@ export function RailCard({ project, index, onOpen }: CardProps) {
         <div className="mt-5">
           <Tech items={project.technologies} max={3} />
         </div>
-        {project.liveUrl && (
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="mt-5 inline-flex items-center gap-1.5 text-sm text-mute transition-colors hover:text-accent-bright"
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          <LiveDemoButton project={project} size="sm" />
+          <button
+            type="button"
+            onClick={() => onOpen(project)}
+            className="text-xs text-mute transition-colors hover:text-accent-bright"
           >
-            Visit live site
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </a>
-        )}
+            Case study
+          </button>
+        </div>
       </div>
     </article>
   );

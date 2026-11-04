@@ -67,97 +67,36 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "ai-editor",
-    title: "AI Editor",
-    category: "AI Product · Vue.js",
-    type: "AI-powered editor",
+    slug: "funai-studio",
+    image: "/projects/funai-studio.png",
+    title: "FunAI Studio",
+    category: "AI Product · Funsol Technologies",
+    type: "Generative AI creative hub",
     year: "2026",
     description:
-      "A large AI-powered editor built in Vue.js — my main product work at Funsol Technologies.",
-    technologies: ["Vue.js", "JavaScript", "REST APIs", "Component architecture"],
+      "Browser-based creative hub that generates images, video, voiceover, music and 3D from one prompt — built with the team at Funsol Technologies.",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "REST APIs"],
     capabilities: [
-      "AI-assisted editing interface",
-      "Large-scale component architecture",
-      "Reusable UI systems",
+      "Image and video generation interfaces",
+      "Voice, music and 3D generation flows",
+      "Credit and plan-aware product UI",
       "API-driven application state",
-      "Responsive product interface",
+      "Responsive creative workspace",
     ],
-    motif: "editor",
-    layout: "feature",
+    motif: "media",
+    layout: "split",
     featured: true,
-    caseStudy: {
-      overview:
-        "An AI-powered editor developed in Vue.js at Funsol Technologies, where I work as a frontend developer on the product.",
-      approach:
-        "A long-running product rather than a one-off build: the interface is composed from a reusable component system so features can be added without the editor drifting apart.",
-      architecture: [
-        "Vue.js component architecture across a large editor surface",
-        "Shared UI system for consistent editor controls",
-        "REST API integration driving application state",
-      ],
-    },
-  },
-  {
-    slug: "framekit-remotion",
-    title: "Framekit",
-    category: "Creative Product · Video Engineering",
-    type: "Programmatic video platform",
-    year: "2026",
-    description:
-      "Turns spreadsheets, scripts and URLs into rendered video. Built on Remotion.",
-    technologies: [
-      "Next.js",
-      "TypeScript",
-      "Remotion",
-      "React",
-      "Tailwind CSS",
-      "Framer Motion",
-    ],
-    capabilities: [
-      "Template-based video generation",
-      "Data-to-video from CSV, Excel & JSON",
-      "Script-to-video and website-to-video",
-      "Multi-scene long-form workflows",
-      "Timeline editing with live preview",
-      "Video export & rendering pipeline",
-    ],
-    motif: "video",
-    layout: "visual",
-    featured: true,
-    liveUrl: "https://remotion-green.vercel.app/",
-    caseStudy: {
-      overview:
-        "Framekit treats video as a render target for React. Instead of editing clips by hand, a user picks a template, feeds it structured input — a spreadsheet, a JSON payload, a script, or a URL — and the platform composes a multi-scene video from it.",
-      problem:
-        "Producing video at volume normally means repeating the same edit for every row of data. The manual loop is the bottleneck, not the creative decision.",
-      approach:
-        "Scenes are React components with a declared prop contract, so a template is a typed composition rather than a fixed timeline. Any input source that can be normalised into that contract becomes a valid video source — which is what makes CSV, JSON, a script and a website URL interchangeable inputs.",
-      architecture: [
-        "Remotion composition layer — scenes as typed React components",
-        "Input adapters normalising CSV / Excel / JSON / script / URL into a shared scene contract",
-        "Timeline state driving both the editor UI and the render",
-        "Live preview bound to the same composition used for final export",
-        "Render & export pipeline for long-form, multi-scene output",
-      ],
-      uiux: [
-        "Editor built around a timeline: scenes are the unit of interaction",
-        "Preview and output are the same composition, so what is edited is what renders",
-        "Progressive disclosure — template selection first, scene-level control second",
-      ],
-      challenges:
-        "Keeping the interactive preview in sync with the render pipeline while long-form, multi-scene compositions stay responsive to edit.",
-      solution:
-        "A single source of truth for timeline and scene state, consumed by the editor and the renderer alike, so preview fidelity is structural rather than approximated.",
-    },
+    liveUrl: "https://funai.art",
   },
   {
     slug: "tools4pdf",
+    image: "/projects/tools4pdf.png",
     title: "Tools4PDF",
     category: "SaaS · Document Tooling",
     type: "PDF tools platform",
     year: "2026",
     description:
-      "A suite of PDF tools sharing one responsive SaaS interface.",
+      "A suite of PDF tools sharing one responsive SaaS interface — I built the frontend as part of the team.",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "REST APIs"],
     capabilities: [
       "PDF processing workflows",
@@ -191,12 +130,13 @@ export const projects: Project[] = [
   },
   {
     slug: "tml-inventory",
+    image: "/projects/tml-inventory.png",
     title: "TML Inventory Management System",
     category: "Business System · MERN",
     type: "Inventory & admin platform",
     year: "2025",
     description:
-      "Inventory management and admin dashboards on the MERN stack.",
+      "A full-stack mart inventory management system, developed completely from scratch on the MERN stack.",
     technologies: ["React", "Node.js", "Express", "MongoDB", "REST APIs"],
     capabilities: [
       "Inventory tracking & management",
@@ -208,7 +148,7 @@ export const projects: Project[] = [
     motif: "dashboard",
     layout: "stacked",
     featured: true,
-    liveUrl: "https://tml-frontend.vercel.app/",
+    liveUrl: "https://martinventorysystem.vercel.app/login",
     demoNote: "Sign-in required — ask me for access",
     caseStudy: {
       overview:
@@ -227,6 +167,7 @@ export const projects: Project[] = [
   },
   {
     slug: "azwah",
+    image: "/projects/azwah.png",
     title: "Azwah",
     category: "eCommerce · Luxury",
     type: "Fragrance storefront",
@@ -259,6 +200,7 @@ export const projects: Project[] = [
   },
   {
     slug: "gcs-assessment",
+    image: "/projects/gcs-assessment.png",
     title: "GCS Structured Assessment",
     category: "Interactive Tool · Clinical Education",
     type: "Assessment & scoring system",
@@ -292,7 +234,126 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "framekit-remotion",
+    image: "/projects/framekit-remotion.png",
+    title: "Framekit",
+    category: "Creative Product · Video Engineering",
+    type: "Programmatic video platform",
+    year: "2026",
+    description:
+      "Turns spreadsheets, scripts and URLs into rendered video. Built on Remotion.",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Remotion",
+      "React",
+      "Tailwind CSS",
+      "Framer Motion",
+    ],
+    capabilities: [
+      "Template-based video generation",
+      "Data-to-video from CSV, Excel & JSON",
+      "Script-to-video and website-to-video",
+      "Multi-scene long-form workflows",
+      "Timeline editing with live preview",
+      "Video export & rendering pipeline",
+    ],
+    motif: "video",
+    layout: "visual",
+    featured: true,
+    liveUrl: "https://framekit-remotion.vercel.app/",
+    demoNote: "Admin area is sign-in only — ask me for access",
+    caseStudy: {
+      overview:
+        "Framekit treats video as a render target for React. Instead of editing clips by hand, a user picks a template, feeds it structured input — a spreadsheet, a JSON payload, a script, or a URL — and the platform composes a multi-scene video from it.",
+      problem:
+        "Producing video at volume normally means repeating the same edit for every row of data. The manual loop is the bottleneck, not the creative decision.",
+      approach:
+        "Scenes are React components with a declared prop contract, so a template is a typed composition rather than a fixed timeline. Any input source that can be normalised into that contract becomes a valid video source — which is what makes CSV, JSON, a script and a website URL interchangeable inputs.",
+      architecture: [
+        "Remotion composition layer — scenes as typed React components",
+        "Input adapters normalising CSV / Excel / JSON / script / URL into a shared scene contract",
+        "Timeline state driving both the editor UI and the render",
+        "Live preview bound to the same composition used for final export",
+        "Render & export pipeline for long-form, multi-scene output",
+      ],
+      uiux: [
+        "Editor built around a timeline: scenes are the unit of interaction",
+        "Preview and output are the same composition, so what is edited is what renders",
+        "Progressive disclosure — template selection first, scene-level control second",
+      ],
+      challenges:
+        "Keeping the interactive preview in sync with the render pipeline while long-form, multi-scene compositions stay responsive to edit.",
+      solution:
+        "A single source of truth for timeline and scene state, consumed by the editor and the renderer alike, so preview fidelity is structural rather than approximated.",
+    },
+  },
+  {
+    slug: "chishmish",
+    image: "/projects/chishmish.png",
+    title: "Chishmish",
+    category: "eCommerce · Eyewear",
+    type: "Online eyewear store",
+    year: "2026",
+    description:
+      "Eyewear storefront with virtual try-on, shape filters, wishlist and prescription lens ordering.",
+    technologies: ["Next.js", "React", "Tailwind CSS", "REST APIs"],
+    capabilities: [
+      "Camera-based virtual try-on",
+      "Filtering by frame and face shape",
+      "Cart, wishlist and prescription upload",
+      "Order tracking without an account",
+      "Responsive commerce UI",
+    ],
+    motif: "commerce",
+    layout: "rail",
+    featured: false,
+    liveUrl: "https://www.chishmish.com/",
+  },
+  {
+    slug: "rah",
+    image: "/projects/rah.png",
+    title: "RAH",
+    category: "eCommerce · Fashion Fabrics",
+    type: "Unstitched fabric storefront",
+    year: "2026",
+    description:
+      "Unstitched fabric store sold by length — lawn, chiffon, embroidered and festive collections with nationwide delivery.",
+    technologies: ["Next.js", "React", "Tailwind CSS", "REST APIs"],
+    capabilities: [
+      "Collection-led browsing",
+      "Sold-by-length product selection",
+      "Cash on delivery ordering flow",
+      "Responsive commerce UI",
+    ],
+    motif: "commerce",
+    layout: "rail",
+    featured: false,
+    liveUrl: "https://www.therahpk.com/",
+  },
+  {
+    slug: "apex-virtual-services",
+    image: "/projects/apex-virtual-services.png",
+    title: "Apex Virtual Services",
+    category: "Company Profile",
+    type: "Digital services company website",
+    year: "2025",
+    description:
+      "Company profile site for a remote digital services team — web development, video editing, lead generation and bookkeeping.",
+    technologies: ["Next.js", "React", "Tailwind CSS"],
+    capabilities: [
+      "Service-led information architecture",
+      "Clear enquiry paths",
+      "Responsive company profile",
+    ],
+    motif: "enterprise",
+    layout: "rail",
+    featured: false,
+    liveUrl: "https://apexvirtualservices.com",
+  },
+  {
     slug: "webginet",
+    image: "/projects/webginet.png",
     title: "Webginet",
     category: "Enterprise · Corporate Web",
     type: "Technology company website",
@@ -320,6 +381,7 @@ export const projects: Project[] = [
   },
   {
     slug: "efren-sports",
+    image: "/projects/efren-sports.png",
     title: "Efren Sports & Events",
     category: "Premium Web · Sports & Events",
     type: "Venue & booking experience",
@@ -341,6 +403,7 @@ export const projects: Project[] = [
   },
   {
     slug: "pak-arabian",
+    image: "/projects/pak-arabian.png",
     title: "Pak Arabian Enterprises",
     category: "eCommerce · Luxury Fragrance",
     type: "Direct-to-consumer storefront",
@@ -358,7 +421,7 @@ export const projects: Project[] = [
     motif: "commerce",
     layout: "rail",
     featured: false,
-    liveUrl: "https://pak-arabian.vercel.app/",
+    liveUrl: "https://www.pakarabian.pk",
     caseStudy: {
       overview:
         "A direct-to-consumer storefront for an artisanal perfume house, built around a browsable library of scents split by men's, women's, unisex and signature collections.",
@@ -368,6 +431,7 @@ export const projects: Project[] = [
   },
   {
     slug: "lumina",
+    image: "/projects/lumina.png",
     title: "LUMINA",
     category: "eCommerce · Fashion",
     type: "Luxury apparel storefront",
@@ -396,6 +460,7 @@ export const projects: Project[] = [
   },
   {
     slug: "surveillance-platform",
+    image: "/projects/surveillance-platform.png",
     title: "Surveillance Solutions Platform",
     category: "Enterprise · Security Technology",
     type: "Product & solutions website",
@@ -425,6 +490,7 @@ export const projects: Project[] = [
   },
   {
     slug: "video-player",
+    image: "/projects/video-player.png",
     title: "Video Player",
     category: "Media Interface",
     type: "Custom player UI",
@@ -445,6 +511,7 @@ export const projects: Project[] = [
   },
   {
     slug: "psychologist",
+    image: "/projects/psychologist.png",
     title: "Psychologist Practice",
     category: "Professional Services",
     type: "Practice website",
@@ -465,6 +532,7 @@ export const projects: Project[] = [
   },
   {
     slug: "auth-application",
+    image: "/projects/auth-application.png",
     title: "Nexus Dashboard",
     category: "Application · Dashboard",
     type: "Dashboard & auth system",

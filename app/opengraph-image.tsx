@@ -59,7 +59,7 @@ export default function OpenGraphImage() {
             }}
           >
             <span>I turn ideas into digital products that&nbsp;</span>
-            <span style={{ color: "#9b83ff" }}>work.</span>
+            <span style={{ color: "#60a5fa" }}>work.</span>
           </div>
           <div style={{ marginTop: 28, fontSize: 26, color: "#8b8b96" }}>
             {`${site.name} — Frontend & Full-Stack Developer`}

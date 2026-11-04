@@ -1,27 +1,40 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowUpRight, GraduationCap, MapPin } from "lucide-react";
+import {
+  ArrowUpRight,
+  GraduationCap,
+  MapPin,
+  UserRound,
+  Layers,
+  Workflow,
+  Target,
+  type LucideIcon,
+} from "lucide-react";
 import { site } from "@/data/site";
 import { education } from "@/data/experience";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 
-const blocks = [
+const blocks: { label: string; body: string; icon: LucideIcon }[] = [
   {
     label: "Who I am",
-    body: "Frontend developer in Islamabad. On-site at Funsol Technologies, freelancing since 2022.",
+    icon: UserRound,
+    body: "Full-stack developer in Islamabad. Engineering at Funsol Technologies and Zetfair, and building for many clients since 2022.",
   },
   {
     label: "What I build",
-    body: "SaaS products, dashboards, eCommerce, interactive tools and API-driven applications.",
+    icon: Layers,
+    body: "SaaS products, inventory systems, dashboards, eCommerce and API-driven applications — frontend to database.",
   },
   {
     label: "How I work",
+    icon: Workflow,
     body: "Figma, screenshot or rough idea in — production interface, integrated and deployed, out.",
   },
   {
     label: "Where I add value",
+    icon: Target,
     body: "Between design and engineering: builds that survive real data, real devices and the next developer.",
   },
 ];
@@ -47,7 +60,7 @@ export function About() {
           {/* Left: identity card */}
           <div>
             <Reveal direction="right">
-              <div className="grain sticky top-32 overflow-hidden rounded-3xl border border-line bg-gradient-to-b from-surface-2 to-ink-2 p-8">
+              <div className="card-pro sticky top-32 rounded-3xl bg-gradient-to-b from-surface to-surface-2 p-8">
                 <div className="grid-field absolute inset-0 opacity-30" aria-hidden />
 
                 <div className="relative">
@@ -111,25 +124,30 @@ export function About() {
           </div>
 
           {/* Right: the narrative */}
-          <Stagger className="divide-y divide-line-soft">
-            {blocks.map((block, i) => (
-              <StaggerItem
-                key={block.label}
-                className="group grid gap-4 py-8 first:pt-0 md:grid-cols-[9rem_1fr] md:gap-8"
-              >
-                <div className="flex items-baseline gap-3 md:flex-col md:gap-2">
-                  <span className="eyebrow text-accent">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="text-sm font-medium tracking-tight text-bone">
-                    {block.label}
-                  </h3>
-                </div>
-                <p className="text-[15px] leading-relaxed text-mute transition-colors duration-500 group-hover:text-bone/85 md:text-base">
-                  {block.body}
-                </p>
-              </StaggerItem>
-            ))}
+          <Stagger className="grid gap-5 sm:grid-cols-2">
+            {blocks.map((block, i) => {
+              const Icon = block.icon;
+              return (
+                <StaggerItem key={block.label} className="h-full">
+                  <div className="card-pro h-full p-7">
+                    <div className="flex items-center justify-between">
+                      <span className={`${i % 2 ? "icon-tile-hot" : "icon-tile"} h-12 w-12`}>
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <span className="font-mono text-2xl font-semibold text-hot/25">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <h3 className="mt-6 text-lg font-semibold tracking-tight">
+                      {block.label}
+                    </h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-mute">
+                      {block.body}
+                    </p>
+                  </div>
+                </StaggerItem>
+              );
+            })}
           </Stagger>
         </div>
       </div>

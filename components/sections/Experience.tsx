@@ -27,7 +27,7 @@ export function Experience() {
         <SectionHeading
           index="04"
           label="Experience"
-          title="Four years, six teams, one discipline."
+          title="Four years, many clients, one discipline."
           lede="Professional on-site engineering and independent client work, running in parallel since 2022."
         />
 
@@ -74,8 +74,9 @@ export function Experience() {
 
                     {/* Entry */}
                     <div className="md:pl-10">
+                      <div className="card-pro p-6 md:p-8">
                       <div className="flex flex-wrap items-center gap-3">
-                        <h3 className="text-xl font-medium tracking-tight md:text-2xl">
+                        <h3 className="text-lg font-semibold tracking-tight md:text-xl">
                           {role.position}
                         </h3>
                         {role.current && (
@@ -108,6 +109,7 @@ export function Experience() {
                           </li>
                         ))}
                       </ul>
+                      </div>
                     </div>
                   </div>
                 </Reveal>

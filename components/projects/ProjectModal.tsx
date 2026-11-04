@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, X } from "lucide-react";
+import { ArrowUpRight, ExternalLink, X } from "lucide-react";
 import { GithubIcon } from "@/components/ui/BrandIcons";
 import type { Project } from "@/data/projects";
 import { ProjectPlate } from "./ProjectPlate";
@@ -152,7 +152,7 @@ export function ProjectModal({
             <div className="mx-auto max-w-5xl">
               {/* Header */}
               <p className="eyebrow text-accent">{project.category}</p>
-              <h2 className="display mt-5 text-4xl sm:text-6xl lg:text-7xl">
+              <h2 className="display mt-5 text-3xl sm:text-4xl lg:text-5xl">
                 {project.title}
               </h2>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-mute">
@@ -165,9 +165,9 @@ export function ProjectModal({
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-bone px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-accent-bright hover:text-white"
+                    className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-accent-bright"
                   >
-                    Live Demo <ArrowUpRight className="h-4 w-4" />
+                    <ExternalLink className="h-4 w-4" /> Live Demo
                   </a>
                 )}
                 {project.githubUrl && (

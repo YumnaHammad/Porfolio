@@ -27,11 +27,11 @@ export function SectionHeading({
   className,
 }: SectionHeadingProps) {
   return (
-    <div className={cn("mb-14 md:mb-20", className)}>
+    <div className={cn("mb-10 md:mb-14", className)}>
       <Reveal direction="none">
         <div className="flex items-center gap-3 mb-7">
-          <span className="eyebrow text-accent">{index}</span>
-          <span className="h-px w-8 bg-line" aria-hidden />
+          <span className="eyebrow font-semibold text-hot">{index}</span>
+          <span className="h-0.5 w-10 rounded-full bg-gradient-to-r from-accent to-hot" aria-hidden />
           <span className="eyebrow">{label}</span>
         </div>
       </Reveal>
@@ -45,7 +45,7 @@ export function SectionHeading({
         <TextReveal
           as="h2"
           text={title}
-          className="display text-[2.5rem] leading-[1.02] sm:text-6xl lg:text-7xl max-w-[16ch]"
+          className="display text-[1.75rem] leading-[1.12] sm:text-4xl lg:text-5xl max-w-[22ch]"
         />
         {lede && (
           <Reveal delay={0.15}>

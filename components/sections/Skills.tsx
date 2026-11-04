@@ -9,7 +9,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils";
 
 const levelStyles: Record<Skill["level"], string> = {
-  Core: "border-accent/40 bg-accent/10 text-accent-bright",
+  Core: "border-accent bg-accent text-white",
   Advanced: "border-line bg-surface text-bone",
   "Working knowledge": "border-line-soft bg-transparent text-faint",
 };
@@ -41,7 +41,7 @@ export function Skills() {
           <div className="lg:order-2">
             <div className="lg:sticky lg:top-32">
               <Reveal direction="left">
-                <div className="grain relative min-h-[20rem] overflow-hidden rounded-3xl border border-line bg-gradient-to-b from-surface-2 to-ink-2 p-8">
+                <div className="card-pro relative min-h-[20rem] rounded-3xl bg-gradient-to-b from-surface to-surface-2 p-8">
                   <div className="grid-field absolute inset-0 opacity-25" aria-hidden />
 
                   <AnimatePresence mode="wait">
@@ -114,9 +114,10 @@ export function Skills() {
           {/* Clusters */}
           <div className="space-y-10 lg:order-1">
             {clusters.map((cluster) => (
-              <Reveal key={cluster.id} className="border-t border-line-soft pt-7">
+              <Reveal key={cluster.id}>
+                <div className="card-pro p-6">
                 <div className="mb-5 flex flex-wrap items-baseline justify-between gap-3">
-                  <h3 className="text-lg font-medium tracking-tight">
+                  <h3 className="text-lg font-semibold tracking-tight">
                     {cluster.title}
                   </h3>
                   <p className="font-mono text-[11px] text-faint">{cluster.note}</p>
@@ -136,14 +137,14 @@ export function Skills() {
                           className={cn(
                             "rounded-full border px-4 py-2 text-sm transition-all duration-300",
                             isActive
-                              ? "border-accent bg-accent/12 text-accent-bright"
-                              : "border-line-soft text-mute hover:border-line hover:text-bone",
+                              ? "border-accent bg-accent text-white shadow-md shadow-accent/30"
+                              : "border-line bg-surface-2/60 text-mute hover:border-accent/50 hover:text-accent-bright",
                           )}
                         >
                           {skill.name}
                           {skill.level === "Core" && (
                             <span
-                              className="ml-2 inline-block h-1 w-1 rounded-full bg-accent align-middle"
+                              className="ml-2 inline-block h-1.5 w-1.5 rounded-full bg-hot align-middle"
                               aria-hidden
                             />
                           )}
@@ -152,6 +153,7 @@ export function Skills() {
                     );
                   })}
                 </Stagger>
+                </div>
               </Reveal>
             ))}
           </div>
